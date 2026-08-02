@@ -238,7 +238,53 @@ document.getElementById("diagnosis").innerHTML = evaluationData.diagnosis;
 document.getElementById("joint").innerHTML = evaluationData.joint;
 
 }
+let testText = "";
 
+if(evaluationData){
+
+let joint = evaluationData.joint;
+
+
+if(joint === "الكتف"){
+
+testText = "اختبار الكتف: الثني - البسط - التبعيد - الدوران";
+
+}
+
+else if(joint === "الكوع"){
+
+testText = "اختبار الكوع: الثني والبسط";
+
+}
+
+else if(joint === "الرسغ"){
+
+testText = "اختبار الرسغ: الثني والبسط";
+
+}
+
+else if(joint === "الورك"){
+
+testText = "اختبار الورك: الثني - البسط - التبعيد";
+
+}
+
+else if(joint === "الركبة"){
+
+testText = "اختبار الركبة: ثني ومد الركبة";
+
+}
+
+else if(joint === "الكاحل"){
+
+testText = "اختبار الكاحل: الثني الظهري والثني الأخمصي";
+
+}
+
+
+document.getElementById("movementTest").innerHTML = testText;
+
+}
 
 const pose = new Pose({
 
