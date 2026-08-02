@@ -202,56 +202,35 @@ video.srcObject = stream;
 
 .catch(function(){
 
-alert("تعذر تشغيل الكاميرا");
+    alert("تعذر تشغيل الكاميرا");
 
 });
-
-}
-
 
 
 function stopCamera(){
 
-if(stream){
+    if(stream){
 
-stream.getTracks().forEach(track=>track.stop());
+        stream.getTracks().forEach(track => track.stop());
 
-video.srcObject=null;
-
-}
-
-}
-
-
-
-
-<script>
-
-const pose = new Pose({
-    locateFile: (file) => {
-        return `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${file}`;
-    }
-});
-
-
-pose.setOptions({
-    modelComplexity: 1,
-    smoothLandmarks: true,
-    enableSegmentation: false,
-    minDetectionConfidence: 0.5,
-    minTrackingConfidence: 0.5
-});
-
-
-pose.onResults((results)=>{
-
-    if(results.poseLandmarks){
-
-        console.log("🧍 تم اكتشاف الجسم");
+        video.srcObject = null;
 
     }
 
-});
+}
+
+
+// ربط الكاميرا مع الذكاء الاصطناعي
+video.onloadeddata = () => {
+
+    setInterval(()=>{
+
+        pose.send({image: video});
+
+    },100);
+
+};
+
 
 </script>
 
