@@ -197,15 +197,7 @@ video:true
 stream = mediaStream;
 
 video.srcObject = stream;
-video.onloadeddata = () => {
 
-    setInterval(()=>{
-
-        pose.send({image: video});
-
-    },100);
-
-};
 })
 
 .catch(function(){
