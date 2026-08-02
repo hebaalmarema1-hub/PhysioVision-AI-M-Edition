@@ -268,13 +268,14 @@ stream.getTracks().forEach(track=>track.stop());
 navigator.mediaDevices.getUserMedia({
 
 video:{
-facingMode: frontCamera ? "user" : "environment",
+facingMode: {
+exact: frontCamera ? "user" : "environment"
+},
 width: { ideal: 1280 },
 height: { ideal: 720 }
 }
 
 })
-
 
 .then((mediaStream)=>{
 
