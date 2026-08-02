@@ -263,6 +263,8 @@ stream = mediaStream;
 
 video.srcObject = stream;
 
+canvas.width = video.videoWidth;
+canvas.height = video.videoHeight;
 
 
 video.onloadeddata = ()=>{
