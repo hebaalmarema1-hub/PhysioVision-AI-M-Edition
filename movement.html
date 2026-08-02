@@ -226,12 +226,10 @@ if(!ctx) return;
 
 ctx.clearRect(0,0,canvas.width,canvas.height);
 
-
 if(results.poseLandmarks){
 
 document.getElementById("notes").innerHTML =
 "🧍 تم اكتشاف الجسم";
-
 
 drawConnectors(
 ctx,
@@ -243,7 +241,6 @@ lineWidth:4
 }
 );
 
-
 drawLandmarks(
 ctx,
 results.poseLandmarks,
@@ -253,10 +250,12 @@ lineWidth:2
 }
 );
 
-
 }
 
 });
+
+
+function startCamera(){
 
 drawLandmarks(
 ctx,
