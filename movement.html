@@ -129,7 +129,56 @@ PhysioVision AI – M² Edition
 </button>
 
 </div>
+<script>
 
+let video = document.createElement("video");
+let cameraBox = document.querySelector(".camera");
+let stream;
+
+function startCamera(){
+
+navigator.mediaDevices.getUserMedia({
+    video: true
+})
+.then(function(mediaStream){
+
+    stream = mediaStream;
+
+    video.srcObject = stream;
+    video.autoplay = true;
+
+    video.style.width = "100%";
+    video.style.height = "100%";
+    video.style.borderRadius = "20px";
+
+    cameraBox.innerHTML = "";
+    cameraBox.appendChild(video);
+
+})
+.catch(function(){
+
+    alert("تعذر تشغيل الكاميرا");
+
+});
+
+}
+
+
+function stopCamera(){
+
+    if(stream){
+
+        stream.getTracks().forEach(function(track){
+            track.stop();
+        });
+
+        cameraBox.innerHTML = "🎥 مكان عرض الكاميرا";
+
+    }
+
+}
+
+</script>
 </body>
 
 </html>
