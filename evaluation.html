@@ -107,14 +107,59 @@ PhysioVision AI – M² Edition
 </select>
 
 
-<input placeholder="درجة الألم من 0 إلى 10">
+<h3>تقييم الألم</h3>
 
-<input placeholder="مدى الحركة ROM">
+<select id="pain">
+<option value="">درجة الألم (0 - 10)</option>
+<option>0 - لا يوجد ألم</option>
+<option>1</option>
+<option>2</option>
+<option>3 - ألم خفيف</option>
+<option>4</option>
+<option>5</option>
+<option>6 - ألم متوسط</option>
+<option>7</option>
+<option>8</option>
+<option>9</option>
+<option>10 - ألم شديد</option>
+</select>
 
-<input placeholder="قوة العضلات">
 
-<input placeholder="التوازن">
+<h3>مدى الحركة ROM</h3>
 
+<select id="joint">
+<option>اختيار المفصل</option>
+<option>الكتف</option>
+<option>الكوع</option>
+<option>الرسغ</option>
+<option>الورك</option>
+<option>الركبة</option>
+<option>الكاحل</option>
+</select>
+
+
+<h3>قوة العضلات MMT</h3>
+
+<select id="muscleStrength">
+<option>درجة القوة 0 - 5</option>
+<option>0/5 - لا يوجد انقباض</option>
+<option>1/5 - انقباض بسيط</option>
+<option>2/5 - حركة مع إزالة الجاذبية</option>
+<option>3/5 - ضد الجاذبية</option>
+<option>4/5 - ضد مقاومة متوسطة</option>
+<option>5/5 - قوة طبيعية</option>
+</select>
+
+
+<h3>التوازن</h3>
+
+<select id="balance">
+<option>تقييم التوازن</option>
+<option>طبيعي</option>
+<option>ضعيف</option>
+<option>متوسط</option>
+<option>شديد الضعف</option>
+</select>
 
 <textarea placeholder="ملاحظات الأخصائي"></textarea>
 
@@ -145,13 +190,13 @@ category: document.querySelectorAll("select")[1].value,
 
 diagnosis: document.querySelectorAll("select")[2].value,
 
-pain: document.querySelectorAll("input")[1].value,
+pain: document.getElementById("pain").value,
 
-rom: document.querySelectorAll("input")[2].value,
+joint: document.getElementById("joint").value,
 
-muscleStrength: document.querySelectorAll("input")[3].value,
+muscleStrength: document.getElementById("muscleStrength").value,
 
-balance: document.querySelectorAll("input")[4].value,
+balance: document.getElementById("balance").value,
 
 notes: document.querySelector("textarea").value
 
