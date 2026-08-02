@@ -517,6 +517,31 @@ minROM = currentAngle;
 
 document.getElementById("rom").innerHTML =
 "مدى الحركة: " + (maxROM - minROM) + "°";
+ let normal = normalROM[selectedJoint];
+
+let performance = "";
+
+if((maxROM - minROM) >= normal * 0.9){
+
+performance = "ممتاز";
+
+}
+
+else if((maxROM - minROM) >= normal * 0.6){
+
+performance = "جيد";
+
+}
+
+else{
+
+performance = "ضعيف";
+
+}
+
+
+document.getElementById("quality").innerHTML =
+performance; 
 document.getElementById("notes").innerHTML =
 "🧍 تم اكتشاف الجسم";
 
