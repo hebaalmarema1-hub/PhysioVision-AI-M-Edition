@@ -268,7 +268,9 @@ stream.getTracks().forEach(track=>track.stop());
 navigator.mediaDevices.getUserMedia({
 
 video:{
-facingMode: frontCamera ? "user" : "environment"
+facingMode: frontCamera ? "user" : "environment",
+width: { ideal: 1280 },
+height: { ideal: 720 }
 }
 
 })
@@ -288,6 +290,9 @@ canvas.height = video.videoHeight;
 
 video.onloadeddata = ()=>{
 
+canvas.width = video.videoWidth;
+canvas.height = video.videoHeight;
+
 setInterval(()=>{
 
 pose.send({
@@ -297,7 +302,6 @@ image: video
 },100);
 
 };
-
 
 
 })
