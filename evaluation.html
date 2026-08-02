@@ -134,14 +134,43 @@ PhysioVision AI – M² Edition
 
 function saveEvaluation(){
 
+
+let evaluationData = {
+
+patientName: document.querySelector('input[placeholder="اسم المريض"]').value,
+
+ageGroup: document.querySelectorAll("select")[0].value,
+
+category: document.querySelectorAll("select")[1].value,
+
+diagnosis: document.querySelectorAll("select")[2].value,
+
+pain: document.querySelectorAll("input")[1].value,
+
+rom: document.querySelectorAll("input")[2].value,
+
+muscleStrength: document.querySelectorAll("input")[3].value,
+
+balance: document.querySelectorAll("input")[4].value,
+
+notes: document.querySelector("textarea").value
+
+};
+
+
+
 localStorage.setItem(
-"evaluationSaved",
-"true"
+"evaluationData",
+JSON.stringify(evaluationData)
 );
+
+
 
 window.location.href="movement.html";
 
+
 }
+
 
 
 function goBack(){
@@ -149,6 +178,7 @@ function goBack(){
 window.location.href="dashboard.html";
 
 }
+
 
 </script>
 </body>
