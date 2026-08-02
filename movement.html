@@ -254,17 +254,17 @@ video.srcObject = stream;
 
 
 
+video.onloadeddata = ()=>{
+
 setInterval(()=>{
 
-
 pose.send({
-
-image:video
-
+image: video
 });
 
-
 },100);
+
+};
 
 
 
