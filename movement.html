@@ -372,7 +372,65 @@ ctx.clearRect(0,0,canvas.width,canvas.height);
 
 
 if(results.poseLandmarks){
+let landmarks = results.poseLandmarks;
 
+
+// زاوية الكتف
+let shoulderAngle = calculateAngle(
+landmarks[11],
+landmarks[12],
+landmarks[14]
+);
+
+
+// زاوية الكوع
+let elbowAngle = calculateAngle(
+landmarks[12],
+landmarks[14],
+landmarks[16]
+);
+
+
+// زاوية الرسغ (تقريبية من نقاط اليد)
+let wristAngle = calculateAngle(
+landmarks[14],
+landmarks[16],
+landmarks[20]
+);
+
+
+// زاوية الورك
+let hipAngle = calculateAngle(
+landmarks[11],
+landmarks[23],
+landmarks[25]
+);
+
+
+// زاوية الركبة
+let kneeAngle = calculateAngle(
+landmarks[24],
+landmarks[26],
+landmarks[28]
+);
+
+
+// زاوية الكاحل
+let ankleAngle = calculateAngle(
+landmarks[26],
+landmarks[28],
+landmarks[32]
+);
+
+
+document.getElementById("rom").innerHTML =
+
+"الكتف: " + shoulderAngle + "° <br>" +
+"الكوع: " + elbowAngle + "° <br>" +
+"الرسغ: " + wristAngle + "° <br>" +
+"الورك: " + hipAngle + "° <br>" +
+"الركبة: " + kneeAngle + "° <br>" +
+"الكاحل: " + ankleAngle + "°";
 
 document.getElementById("notes").innerHTML =
 "🧍 تم اكتشاف الجسم";
