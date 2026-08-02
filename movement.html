@@ -219,7 +219,17 @@ let ctx = canvas.getContext("2d");
 let stream = null;
 let frontCamera = true;
 let timer = null;
+let evaluationData = JSON.parse(localStorage.getItem("evaluationData"));
 
+if(evaluationData){
+
+document.getElementById("caseType").innerHTML = evaluationData.category;
+
+document.getElementById("diagnosis").innerHTML = evaluationData.diagnosis;
+
+document.getElementById("joint").innerHTML = evaluationData.joint;
+
+}
 
 
 const pose = new Pose({
