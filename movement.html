@@ -466,7 +466,44 @@ document.getElementById("rom").innerHTML =
 "زاوية الكاحل: " + ankleAngle + "°";
 
 }
+let currentAngle = 0;
 
+if(selectedJoint === "الكتف"){
+currentAngle = shoulderAngle;
+}
+
+else if(selectedJoint === "الكوع"){
+currentAngle = elbowAngle;
+}
+
+else if(selectedJoint === "الرسغ"){
+currentAngle = wristAngle;
+}
+
+else if(selectedJoint === "الورك"){
+currentAngle = hipAngle;
+}
+
+else if(selectedJoint === "الركبة"){
+currentAngle = kneeAngle;
+}
+
+else if(selectedJoint === "الكاحل"){
+currentAngle = ankleAngle;
+}
+
+
+if(currentAngle > maxROM){
+maxROM = currentAngle;
+}
+
+if(currentAngle < minROM){
+minROM = currentAngle;
+}
+
+
+document.getElementById("rom").innerHTML =
+"مدى الحركة: " + (maxROM - minROM) + "°";
 document.getElementById("notes").innerHTML =
 "🧍 تم اكتشاف الجسم";
 
