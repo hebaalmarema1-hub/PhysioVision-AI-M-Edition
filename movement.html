@@ -52,7 +52,6 @@ object-fit:cover;
 z-index:1;
 }
 
-
 .camera canvas{
 position:absolute;
 top:0;
@@ -62,81 +61,57 @@ height:100%;
 z-index:2;
 }
 
-
 .results{
-
 background:rgba(255,255,255,.12);
 width:700px;
 max-width:95%;
-margin:auto;
+margin:20px auto;
 padding:25px;
 border-radius:20px;
 text-align:right;
-
 }
-
 
 .results p{
-
 font-size:20px;
 line-height:2;
-
 }
 
-
-
 button{
-
 padding:15px 35px;
 margin:10px;
 border:none;
 border-radius:30px;
 font-size:18px;
 cursor:pointer;
-
 }
-
-
 
 .start{
-
 background:#28a745;
 color:white;
-
 }
-
-
 
 .stop{
-
 background:#dc3545;
 color:white;
-
 }
-
-
 
 .cameraBtn{
-
 background:#ffc107;
 color:black;
-
 }
-
-
 
 .save{
-
 background:white;
 color:#1b6ca8;
-
 }
-
 
 </style>
 
 </head>
+
+
 <body>
+
 
 <div class="container">
 
@@ -147,8 +122,6 @@ color:#1b6ca8;
 <p>
 PhysioVision AI – M² Edition
 </p>
-
-
 <div class="results">
 
 <h2>بيانات التقييم</h2>
@@ -160,6 +133,8 @@ PhysioVision AI – M² Edition
 <p>المفصل: <span id="joint">--</span></p>
 
 </div>
+
+
 <div class="results">
 
 <h2>اختبار المفصل</h2>
@@ -169,6 +144,8 @@ PhysioVision AI – M² Edition
 </p>
 
 </div>
+
+
 <div class="results">
 
 <h2>اختيار الحركة</h2>
@@ -178,6 +155,8 @@ PhysioVision AI – M² Edition
 </p>
 
 </div>
+
+
 <div class="camera">
 
 <video id="video" autoplay playsinline></video>
@@ -200,7 +179,6 @@ PhysioVision AI – M² Edition
 <button class="cameraBtn" onclick="switchCamera()">
 🔄 تبديل الكاميرا
 </button>
-
 
 
 <div class="results">
@@ -235,7 +213,9 @@ let ctx = canvas.getContext("2d");
 let stream = null;
 let frontCamera = true;
 let timer = null;
+
 let evaluationData = JSON.parse(localStorage.getItem("evaluationData"));
+
 
 if(evaluationData){
 
@@ -246,6 +226,9 @@ document.getElementById("diagnosis").innerHTML = evaluationData.diagnosis;
 document.getElementById("joint").innerHTML = evaluationData.joint;
 
 }
+
+
+
 let testText = "";
 
 if(evaluationData){
@@ -293,9 +276,7 @@ testText = "اختبار الكاحل: الثني الظهري والثني ال
 document.getElementById("movementTest").innerHTML = testText;
 
 }
-
-const pose = new Pose({
-let movementOptions = "";
+  let movementOptions = "";
 
 if(evaluationData){
 
@@ -348,6 +329,10 @@ movementOptions =
 document.getElementById("movementOptions").innerHTML = movementOptions;
 
 }
+
+
+const pose = new Pose({
+
 locateFile:(file)=>{
 
 return `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${file}`;
@@ -355,7 +340,6 @@ return `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${file}`;
 }
 
 });
-
 
 
 pose.setOptions({
@@ -366,10 +350,7 @@ minDetectionConfidence:0.5,
 minTrackingConfidence:0.5
 
 });
-
-
-
-pose.onResults((results)=>{
+  pose.onResults((results)=>{
 
 
 ctx.clearRect(0,0,canvas.width,canvas.height);
@@ -414,7 +395,6 @@ lineWidth:2
 
 
 
-
 function startCamera(){
 
 
@@ -441,7 +421,6 @@ video.onloadedmetadata = ()=>{
 canvas.width = video.videoWidth;
 
 canvas.height = video.videoHeight;
-
 
 
 timer = setInterval(()=>{
@@ -475,8 +454,6 @@ alert("تعذر تشغيل الكاميرا");
 
 
 
-
-
 function stopCamera(){
 
 
@@ -500,8 +477,6 @@ document.getElementById("notes").innerHTML =
 
 
 
-
-
 function switchCamera(){
 
 frontCamera = !frontCamera;
@@ -513,10 +488,9 @@ startCamera();
 }
 
 
-
 </script>
 
 
 </body>
 
-</html>  
+</html>
