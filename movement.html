@@ -222,14 +222,16 @@ minTrackingConfidence:0.5
 
 pose.onResults((results)=>{
 
+if(!ctx) return;
+
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+
 if(results.poseLandmarks){
 
 document.getElementById("notes").innerHTML =
 "🧍 تم اكتشاف الجسم";
 
-}
-
-});
 
 drawConnectors(
 ctx,
@@ -241,6 +243,20 @@ lineWidth:4
 }
 );
 
+
+drawLandmarks(
+ctx,
+results.poseLandmarks,
+{
+color:"#FF0000",
+lineWidth:2
+}
+);
+
+
+}
+
+});
 
 drawLandmarks(
 ctx,
