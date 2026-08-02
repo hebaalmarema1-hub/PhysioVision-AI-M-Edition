@@ -9,6 +9,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose/pose.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
+
 <style>
 
 body{
@@ -43,12 +44,14 @@ align-items:center;
 justify-content:center;
 overflow:hidden;
 }
+
 .camera video{
 width:100%;
 height:100%;
 object-fit:cover;
 z-index:1;
 }
+
 
 .camera canvas{
 position:absolute;
@@ -58,7 +61,10 @@ width:100%;
 height:100%;
 z-index:2;
 }
+
+
 .results{
+
 background:rgba(255,255,255,.12);
 width:700px;
 max-width:95%;
@@ -66,58 +72,77 @@ margin:auto;
 padding:25px;
 border-radius:20px;
 text-align:right;
+
 }
+
 
 .results p{
+
 font-size:20px;
 line-height:2;
+
 }
 
+
+
 button{
+
 padding:15px 35px;
 margin:10px;
 border:none;
 border-radius:30px;
 font-size:18px;
 cursor:pointer;
+
 }
+
+
 
 .start{
+
 background:#28a745;
 color:white;
+
 }
+
+
 
 .stop{
+
 background:#dc3545;
 color:white;
+
 }
+
+
 
 .cameraBtn{
+
 background:#ffc107;
 color:black;
+
 }
 
+
+
 .save{
+
 background:white;
 color:#1b6ca8;
+
 }
+
 
 </style>
 
 </head>
-
-
 <body>
-
 
 <div class="container">
 
-
 <img src="IMG_0282.PNG" class="logo">
 
-
 <h1>📹 تحليل الحركة</h1>
-
 
 <p>
 PhysioVision AI – M² Edition
@@ -156,12 +181,9 @@ PhysioVision AI – M² Edition
 
 <p>📐 مدى الحركة (ROM): <span id="rom">--</span></p>
 
-
 <p>🔁 عدد التكرارات: <span id="reps">--</span></p>
 
-
 <p>✅ جودة الأداء: <span id="quality">--</span></p>
-
 
 <p>🤖 ملاحظات الذكاء الاصطناعي: <span id="notes">--</span></p>
 
@@ -170,27 +192,20 @@ PhysioVision AI – M² Edition
 
 
 <button class="save">
-
 حفظ النتائج
-
 </button>
 
 
 </div>
-
-
-
 <script>
 
-
 let video = document.getElementById("video");
-
-let stream;
-
 let canvas = document.getElementById("canvas");
-let ctx = canvas ? canvas.getContext("2d") : null;
+let ctx = canvas.getContext("2d");
 
+let stream = null;
 let frontCamera = true;
+let timer = null;
 
 
 
@@ -209,11 +224,8 @@ return `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${file}`;
 pose.setOptions({
 
 modelComplexity:1,
-
 smoothLandmarks:true,
-
 minDetectionConfidence:0.5,
-
 minTrackingConfidence:0.5
 
 });
@@ -222,14 +234,20 @@ minTrackingConfidence:0.5
 
 pose.onResults((results)=>{
 
-if(!ctx) return;
 
 ctx.clearRect(0,0,canvas.width,canvas.height);
 
+
 if(results.poseLandmarks){
+
 
 document.getElementById("notes").innerHTML =
 "🧍 تم اكتشاف الجسم";
+
+
+document.getElementById("quality").innerHTML =
+"جيد";
+
 
 drawConnectors(
 ctx,
@@ -241,6 +259,7 @@ lineWidth:4
 }
 );
 
+
 drawLandmarks(
 ctx,
 results.poseLandmarks,
@@ -250,88 +269,57 @@ lineWidth:2
 }
 );
 
+
 }
 
+
 });
+
+
 
 
 function startCamera(){
-
-drawLandmarks(
-ctx,
-results.poseLandmarks,
-{
-color:"#FF0000",
-lineWidth:2
-}
-);
-
-
-}
-
-});
-drawLandmarks(
-ctx,
-results.poseLandmarks,
-{
-color:"#FF0000",
-lineWidth:2
-}
-);
-
-}
-
-});
-
-
-function startCamera(){
-
-
-
-if(stream){
-
-stream.getTracks().forEach(track=>track.stop());
-
-}
-
 
 
 navigator.mediaDevices.getUserMedia({
 
 video:{
-facingMode: {
-exact: frontCamera ? "user" : "environment"
-},
-width: { ideal: 1280 },
-height: { ideal: 720 }
+facingMode: frontCamera ? "user" : "environment"
 }
 
 })
+
 
 .then((mediaStream)=>{
 
 
 stream = mediaStream;
 
-
 video.srcObject = stream;
 
+
+video.onloadedmetadata = ()=>{
+
+
 canvas.width = video.videoWidth;
+
 canvas.height = video.videoHeight;
 
 
-video.onloadeddata = ()=>{
 
-canvas.width = video.videoWidth;
-canvas.height = video.videoHeight;
+timer = setInterval(()=>{
 
-setInterval(()=>{
 
 pose.send({
-image: video
+
+image:video
+
 });
 
+
 },100);
+
+
 
 };
 
@@ -341,9 +329,7 @@ image: video
 
 .catch(()=>{
 
-
 alert("تعذر تشغيل الكاميرا");
-
 
 });
 
@@ -359,14 +345,18 @@ function stopCamera(){
 
 if(stream){
 
-
 stream.getTracks().forEach(track=>track.stop());
-
 
 video.srcObject=null;
 
-
 }
+
+
+clearInterval(timer);
+
+
+document.getElementById("notes").innerHTML =
+"بانتظار تشغيل التحليل";
 
 
 }
@@ -377,12 +367,11 @@ video.srcObject=null;
 
 function switchCamera(){
 
-
 frontCamera = !frontCamera;
 
+stopCamera();
 
 startCamera();
-
 
 }
 
@@ -391,7 +380,6 @@ startCamera();
 </script>
 
 
-
 </body>
 
-</html>
+</html>  
