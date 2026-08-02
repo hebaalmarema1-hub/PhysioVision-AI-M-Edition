@@ -169,7 +169,15 @@ PhysioVision AI – M² Edition
 </p>
 
 </div>
+<div class="results">
 
+<h2>اختيار الحركة</h2>
+
+<p id="movementOptions">
+بانتظار تحديد المفصل...
+</p>
+
+</div>
 <div class="camera">
 
 <video id="video" autoplay playsinline></video>
@@ -287,7 +295,59 @@ document.getElementById("movementTest").innerHTML = testText;
 }
 
 const pose = new Pose({
+let movementOptions = "";
 
+if(evaluationData){
+
+let joint = evaluationData.joint;
+
+
+if(joint === "الكتف"){
+
+movementOptions =
+"الثني (Flexion) - البسط (Extension) - التبعيد (Abduction) - الدوران الخارجي - الدوران الداخلي";
+
+}
+
+else if(joint === "الكوع"){
+
+movementOptions =
+"الثني (Flexion) - البسط (Extension)";
+
+}
+
+else if(joint === "الرسغ"){
+
+movementOptions =
+"الثني (Flexion) - البسط (Extension)";
+
+}
+
+else if(joint === "الورك"){
+
+movementOptions =
+"الثني (Flexion) - البسط (Extension) - التبعيد (Abduction)";
+
+}
+
+else if(joint === "الركبة"){
+
+movementOptions =
+"الثني (Flexion) - البسط (Extension)";
+
+}
+
+else if(joint === "الكاحل"){
+
+movementOptions =
+"الثني الظهري (Dorsiflexion) - الثني الأخمصي (Plantarflexion)";
+
+}
+
+
+document.getElementById("movementOptions").innerHTML = movementOptions;
+
+}
 locateFile:(file)=>{
 
 return `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${file}`;
