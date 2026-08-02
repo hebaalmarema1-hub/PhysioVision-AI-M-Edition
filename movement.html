@@ -423,14 +423,49 @@ landmarks[32]
 );
 
 
-document.getElementById("rom").innerHTML =
+let selectedJoint = evaluationData.joint;
 
-"الكتف: " + shoulderAngle + "° <br>" +
-"الكوع: " + elbowAngle + "° <br>" +
-"الرسغ: " + wristAngle + "° <br>" +
-"الورك: " + hipAngle + "° <br>" +
-"الركبة: " + kneeAngle + "° <br>" +
-"الكاحل: " + ankleAngle + "°";
+if(selectedJoint === "الكتف"){
+
+document.getElementById("rom").innerHTML =
+"زاوية الكتف: " + shoulderAngle + "°";
+
+}
+
+else if(selectedJoint === "الكوع"){
+
+document.getElementById("rom").innerHTML =
+"زاوية الكوع: " + elbowAngle + "°";
+
+}
+
+else if(selectedJoint === "الرسغ"){
+
+document.getElementById("rom").innerHTML =
+"زاوية الرسغ: " + wristAngle + "°";
+
+}
+
+else if(selectedJoint === "الورك"){
+
+document.getElementById("rom").innerHTML =
+"زاوية الورك: " + hipAngle + "°";
+
+}
+
+else if(selectedJoint === "الركبة"){
+
+document.getElementById("rom").innerHTML =
+"زاوية الركبة: " + kneeAngle + "°";
+
+}
+
+else if(selectedJoint === "الكاحل"){
+
+document.getElementById("rom").innerHTML =
+"زاوية الكاحل: " + ankleAngle + "°";
+
+}
 
 document.getElementById("notes").innerHTML =
 "🧍 تم اكتشاف الجسم";
