@@ -66,7 +66,7 @@ line-height:2;
 
 button{
 padding:15px 35px;
-margin:15px;
+margin:10px;
 border:none;
 border-radius:30px;
 font-size:18px;
@@ -83,6 +83,11 @@ background:#dc3545;
 color:white;
 }
 
+.cameraBtn{
+background:#ffc107;
+color:black;
+}
+
 .save{
 background:white;
 color:#1b6ca8;
@@ -92,13 +97,18 @@ color:#1b6ca8;
 
 </head>
 
+
 <body>
+
 
 <div class="container">
 
+
 <img src="IMG_0282.PNG" class="logo">
 
+
 <h1>📹 تحليل الحركة</h1>
+
 
 <p>
 PhysioVision AI – M² Edition
@@ -122,38 +132,57 @@ PhysioVision AI – M² Edition
 </button>
 
 
+<button class="cameraBtn" onclick="switchCamera()">
+🔄 تبديل الكاميرا
+</button>
+
+
+
 <div class="results">
 
 <h2>نتائج التحليل</h2>
 
+
 <p>📐 مدى الحركة (ROM): <span id="rom">--</span></p>
+
 
 <p>🔁 عدد التكرارات: <span id="reps">--</span></p>
 
+
 <p>✅ جودة الأداء: <span id="quality">--</span></p>
 
+
 <p>🤖 ملاحظات الذكاء الاصطناعي: <span id="notes">--</span></p>
+
 
 </div>
 
 
 <button class="save">
+
 حفظ النتائج
+
 </button>
 
 
 </div>
 
 
+
 <script>
 
+
 let video = document.getElementById("video");
+
 let stream;
+
+let frontCamera = true;
+
 
 
 const pose = new Pose({
 
-locateFile: (file)=>{
+locateFile:(file)=>{
 
 return `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${file}`;
 
@@ -162,44 +191,71 @@ return `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${file}`;
 });
 
 
+
 pose.setOptions({
 
 modelComplexity:1,
+
 smoothLandmarks:true,
+
 minDetectionConfidence:0.5,
+
 minTrackingConfidence:0.5
 
 });
 
 
+
 pose.onResults((results)=>{
 
+
 if(results.poseLandmarks){
+
 
 document.getElementById("notes").innerHTML =
 "🧍 تم اكتشاف الجسم";
 
+
 }
+
 
 });
 
 
+
 function startCamera(){
+
+
+
+if(stream){
+
+stream.getTracks().forEach(track=>track.stop());
+
+}
+
+
 
 navigator.mediaDevices.getUserMedia({
 
-video:true
+video:{
+facingMode: frontCamera ? "user" : "environment"
+}
 
 })
 
+
 .then((mediaStream)=>{
 
+
 stream = mediaStream;
+
 
 video.srcObject = stream;
 
 
-video.onloadeddata = ()=>{
+
+setInterval(()=>{
+
 
 pose.send({
 
@@ -207,7 +263,9 @@ image:video
 
 });
 
-};
+
+},100);
+
 
 
 })
@@ -215,7 +273,9 @@ image:video
 
 .catch(()=>{
 
+
 alert("تعذر تشغيل الكاميرا");
+
 
 });
 
@@ -224,20 +284,44 @@ alert("تعذر تشغيل الكاميرا");
 
 
 
+
+
 function stopCamera(){
+
 
 if(stream){
 
+
 stream.getTracks().forEach(track=>track.stop());
+
 
 video.srcObject=null;
 
-}
 
 }
+
+
+}
+
+
+
+
+
+function switchCamera(){
+
+
+frontCamera = !frontCamera;
+
+
+startCamera();
+
+
+}
+
 
 
 </script>
+
 
 
 </body>
