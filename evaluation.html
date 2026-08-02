@@ -119,19 +119,38 @@ PhysioVision AI – M² Edition
 <textarea placeholder="ملاحظات الأخصائي"></textarea>
 
 
-<button>
+<button onclick="saveEvaluation()">
 حفظ التقييم
 </button>
 
-<button>
+<button onclick="goBack()">
 رجوع
 </button>
 
-
 </div>
 
 </div>
+<script>
 
+function saveEvaluation(){
+
+localStorage.setItem(
+"evaluationSaved",
+"true"
+);
+
+window.location.href="movement.html";
+
+}
+
+
+function goBack(){
+
+window.location.href="dashboard.html";
+
+}
+
+</script>
 </body>
 
 </html>
