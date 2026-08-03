@@ -591,7 +591,45 @@ maxAngle = 60;
 
 }
 
+// ملاحظات الذكاء الاصطناعي
 
+let aiNote = "";
+
+if(performance === "ممتاز"){
+
+aiNote = "✅ الحركة ممتازة والمدى الحركي قريب من الطبيعي";
+
+}
+
+else if(performance === "جيد"){
+
+aiNote = "⚠️ الحركة جيدة لكن يوجد نقص بسيط في المدى الحركي";
+
+}
+
+else if(performance === "ضعيف"){
+
+aiNote = "❌ يوجد محدودية في الحركة ويحتاج إلى برنامج تأهيلي";
+
+}
+
+
+if(currentAngle < 60){
+
+aiNote += " | ⚠️ زاوية الحركة منخفضة";
+
+}
+
+
+if(repetition > 0){
+
+aiNote += " | 🔁 تم تسجيل " + repetition + " تكرار";
+
+}
+
+
+document.getElementById("notes").innerHTML =
+"🤖 " + aiNote;
 
 if(currentAngle < minAngle){
 
@@ -613,16 +651,7 @@ document.getElementById("reps").innerHTML =
 "عدد التكرارات: " + repetition;
 
 
-document.getElementById("reps").innerHTML =
-"عدد التكرارات: " + repetition;
-
-
-document.getElementById("notes").innerHTML =
-"🧍 تم اكتشاف الجسم";
-
-
-
-drawConnectors(
+rawConnectors(
 ctx,
 results.poseLandmarks,
 POSE_CONNECTIONS,
