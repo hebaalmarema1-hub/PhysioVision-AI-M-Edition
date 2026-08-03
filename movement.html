@@ -543,20 +543,74 @@ performance = "ضعيف";
 document.getElementById("quality").innerHTML =
 performance;
 
-// حساب التكرارات
+// حساب التكرارات حسب المفصل
 
-if(currentAngle < 60){
-movingDown = true;
+let minAngle = 0;
+let maxAngle = 0;
+
+
+if(selectedJoint === "الكوع"){
+
+minAngle = 60;
+maxAngle = 140;
+
+}
+
+else if(selectedJoint === "الركبة"){
+
+minAngle = 70;
+maxAngle = 160;
+
+}
+
+else if(selectedJoint === "الكتف"){
+
+minAngle = 60;
+maxAngle = 150;
+
+}
+
+else if(selectedJoint === "الورك"){
+
+minAngle = 60;
+maxAngle = 130;
+
+}
+
+else if(selectedJoint === "الرسغ"){
+
+minAngle = 40;
+maxAngle = 80;
+
+}
+
+else if(selectedJoint === "الكاحل"){
+
+minAngle = 30;
+maxAngle = 60;
+
 }
 
 
-if(currentAngle > 120 && movingDown === true){
+
+if(currentAngle < minAngle){
+
+movingDown = true;
+
+}
+
+
+if(currentAngle > maxAngle && movingDown === true){
 
 repetition++;
 
 movingDown = false;
 
 }
+
+
+document.getElementById("reps").innerHTML =
+"عدد التكرارات: " + repetition;
 
 
 document.getElementById("reps").innerHTML =
