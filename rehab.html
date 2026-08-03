@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>البرنامج التأهيلي - PhysioVision AI</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:linear-gradient(135deg,#0b1f3a,#1b6ca8);
+color:white;
+text-align:center;
+}
+
+.container{
+padding:40px 20px;
+}
+
+.card{
+background:rgba(255,255,255,.12);
+width:700px;
+max-width:95%;
+margin:20px auto;
+padding:25px;
+border-radius:20px;
+text-align:right;
+}
+
+h1{
+margin-bottom:30px;
+}
+
+p{
+font-size:20px;
+line-height:2;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🏥 البرنامج التأهيلي المقترح</h1>
+
+<div class="card">
+
+<h2>بيانات الحالة</h2>
+
+<p>الحالة: <span id="caseType">--</span></p>
+
+<p>التشخيص: <span id="diagnosis">--</span></p>
+
+<p>المفصل: <span id="joint">--</span></p>
+
+<p>مدى الحركة: <span id="rom">--</span></p>
+
+<p>التقييم: <span id="quality">--</span></p>
+
+<p>عدد التكرارات: <span id="reps">--</span></p>
+
+<p>ملاحظات الذكاء الاصطناعي: <span id="notes">--</span></p>
+
+</div>
+
+<div class="card">
+
+<h2>📋 البرنامج التأهيلي</h2>
+
+<div id="rehabPlan">
+
+بانتظار تحميل البرنامج...
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+let resultData = JSON.parse(localStorage.getItem("resultData"));
+
+if(resultData){
+
+document.getElementById("caseType").innerHTML=resultData.category;
+
+document.getElementById("diagnosis").innerHTML=resultData.diagnosis;
+
+document.getElementById("joint").innerHTML=resultData.joint;
+
+document.getElementById("rom").innerHTML=resultData.rom+"°";
+
+document.getElementById("quality").innerHTML=resultData.quality;
+
+document.getElementById("reps").innerHTML=resultData.reps;
+
+document.getElementById("notes").innerHTML=resultData.notes;
+
+}
+
+</script>
+
+</body>
+
+</html>
