@@ -541,7 +541,28 @@ performance = "ضعيف";
 
 
 document.getElementById("quality").innerHTML =
-performance; 
+performance;
+
+// حساب التكرارات
+
+if(currentAngle < 60){
+movingDown = true;
+}
+
+
+if(currentAngle > 120 && movingDown === true){
+
+repetition++;
+
+movingDown = false;
+
+}
+
+
+document.getElementById("reps").innerHTML =
+"عدد التكرارات: " + repetition;
+
+
 document.getElementById("notes").innerHTML =
 "🧍 تم اكتشاف الجسم";
 
