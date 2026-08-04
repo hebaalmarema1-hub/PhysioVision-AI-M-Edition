@@ -105,7 +105,123 @@ document.getElementById("reps").innerHTML=resultData.reps;
 document.getElementById("notes").innerHTML=resultData.notes;
 
 }
+let plan = "";
 
+if(resultData.joint.includes("كوع")){
+
+plan = `
+<h3>خطة تأهيل الكوع</h3>
+<p>
+المرحلة: تحسين القوة والمحافظة على الحركة<br><br>
+
+التمارين:<br>
+✅ تمارين مدى الحركة للكوع<br>
+✅ تقوية عضلات الذراع<br>
+✅ تمارين مقاومة تدريجية<br>
+✅ تمارين وظيفية<br><br>
+
+الأجهزة:<br>
+- شريط مقاومة<br>
+- أوزان خفيفة<br>
+- جهاز تحفيز كهربائي عند الحاجة
+</p>
+`;
+
+}
+
+else if(resultData.joint.includes("رسغ")){
+
+plan = `
+<h3>خطة تأهيل الرسغ</h3>
+<p>
+التمارين:<br>
+✅ تمارين حركة الرسغ<br>
+✅ تقوية القبضة<br>
+✅ تمارين مقاومة<br><br>
+
+الأجهزة:<br>
+- كرة علاجية<br>
+- Hand gripper<br>
+- شريط مقاومة
+</p>
+`;
+
+}
+
+else if(resultData.joint.includes("كتف")){
+
+plan = `
+<h3>خطة تأهيل الكتف</h3>
+<p>
+التمارين:<br>
+✅ تمارين مدى الحركة<br>
+✅ تقوية الكفة المدورة<br>
+✅ تمارين ثبات الكتف<br><br>
+
+الأجهزة:<br>
+- Pulley<br>
+- شريط مقاومة<br>
+- أوزان خفيفة
+</p>
+`;
+
+}
+
+else if(resultData.joint.includes("ورك")){
+
+plan = `
+<h3>خطة تأهيل الورك</h3>
+<p>
+التمارين:<br>
+✅ تقوية عضلات الحوض<br>
+✅ تمارين توازن<br>
+✅ تدريب المشي<br><br>
+
+الأجهزة:<br>
+- دراجة ثابتة<br>
+- جهاز مقاومة
+</p>
+`;
+
+}
+
+else if(resultData.joint.includes("ركبة")){
+
+plan = `
+<h3>خطة تأهيل الركبة</h3>
+<p>
+التمارين:<br>
+✅ تمارين مدى الحركة<br>
+✅ تقوية العضلة الرباعية<br>
+✅ تمارين توازن<br><br>
+
+الأجهزة:<br>
+- دراجة ثابتة<br>
+- جهاز مقاومة
+</p>
+`;
+
+}
+
+else if(resultData.joint.includes("كاحل")){
+
+plan = `
+<h3>خطة تأهيل الكاحل</h3>
+<p>
+التمارين:<br>
+✅ تمارين حركة الكاحل<br>
+✅ تقوية عضلات الساق<br>
+✅ تمارين توازن<br><br>
+
+الأجهزة:<br>
+- Balance board<br>
+- شريط مقاومة
+</p>
+`;
+
+}
+
+document.getElementById("rehabPlan").innerHTML = plan;
 </script>
 
 </body>
