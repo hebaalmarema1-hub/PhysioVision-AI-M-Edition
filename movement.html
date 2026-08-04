@@ -198,10 +198,9 @@ PhysioVision AI – M² Edition
 </div>
 
 
-<button class="save">
+<button class="save" onclick="saveResults()">
 حفظ النتائج
 </button>
-
 
 </div>
 <script>
@@ -770,7 +769,31 @@ stopCamera();
 startCamera();
 
 }
+function saveResults(){
 
+let resultData = {
+
+category: evaluationData.category,
+
+diagnosis: evaluationData.diagnosis,
+
+joint: evaluationData.joint,
+
+rom: maxROM - minROM,
+
+reps: repetition,
+
+quality: document.getElementById("quality").innerText,
+
+notes: document.getElementById("notes").innerText
+
+};
+
+localStorage.setItem("resultData", JSON.stringify(resultData));
+
+window.location.href = "rehab.html";
+
+}
 
 </script>
 
