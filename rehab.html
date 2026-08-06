@@ -307,7 +307,9 @@ notes:
 
 // البحث عن البروتوكول
 
-let key = resultData.diagnosis + " " + resultData.joint;
+let key = 
+(resultData.diagnosis + " " + resultData.joint)
+.replace("ال","");
 
 
 let selectedPlan = null;
