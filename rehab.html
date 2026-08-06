@@ -516,7 +516,9 @@ document.getElementById("rom").innerHTML =
 document.getElementById("reps").innerHTML =
 data.reps || "0";
 
-
+let program = 
+rehabPrograms[data.diagnosis] ||
+rehabPrograms[data.category];
 document.getElementById("quality").innerHTML =
 data.quality || "--";
 
