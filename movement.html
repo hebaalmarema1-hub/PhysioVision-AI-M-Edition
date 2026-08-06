@@ -760,16 +760,9 @@ document.getElementById("notes").innerHTML =
 
 
 
-function switchCamera(){
-
-frontCamera = !frontCamera;
-
-stopCamera();
-
-startCamera();
-
-}
 function saveResults(){
+
+alert("تم الضغط على حفظ النتائج");
 
 let resultData = {
 
@@ -784,7 +777,14 @@ quality: document.getElementById("quality").innerText,
 notes: document.getElementById("notes").innerText
 
 };
-console.log(resultData);
+
+localStorage.setItem("resultData", JSON.stringify(resultData));
+
+alert(JSON.stringify(resultData));
+
+window.location.href="rehab.html";
+
+}
 localStorage.setItem("resultData", JSON.stringify(resultData));
 
 window.location.href = "rehab.html";
