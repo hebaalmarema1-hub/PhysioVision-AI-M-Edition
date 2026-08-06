@@ -192,10 +192,8 @@ devices:[
 
 duration:"12 أسبوع - حسب الحالة"
 
-}
-
-
 };
+  
   rehabPrograms["إصابات الكتف"]={
 
 goals:[
@@ -254,7 +252,6 @@ duration:"6 - 8 أسابيع حسب الحالة"
 };
 
 
-
 rehabPrograms["بعد الكسور"]={
 
 goals:[
@@ -280,35 +277,6 @@ devices:[
 duration:"8 - 12 أسبوع حسب مرحلة الالتئام"
 
 };
-  rehabPrograms["إصابات الركبة"]={
-
-goals:[
-"تقليل الألم والتورم",
-"استعادة مدى حركة الركبة",
-"تقوية عضلات الفخذ",
-"تحسين الثبات والتوازن"
-],
-
-exercises:[
-"Quadriceps setting",
-"Straight leg raise",
-"ثني ومد الركبة",
-"Half squat",
-"Step up",
-"تمارين التوازن على رجل واحدة"
-],
-
-devices:[
-"TENS",
-"NMES",
-"Ultrasound",
-"Cold Therapy"
-],
-
-duration:"6 - 8 أسابيع حسب شدة الإصابة"
-
-};
-
 
 
 rehabPrograms["إصابات الكوع"]={
@@ -395,61 +363,6 @@ duration:"6 - 8 أسابيع حسب شدة الإصابة"
 };
 
 
-
-rehabPrograms["إصابات الكوع"]={
-
-goals:[
-"تقليل الألم",
-"استعادة حركة الكوع",
-"تقوية عضلات الذراع",
-"تحسين الوظيفة اليومية"
-],
-
-exercises:[
-"تمارين ثني ومد الكوع",
-"تمارين مدى الحركة ROM",
-"تمارين المقاومة الخفيفة",
-"تمارين الشريط المطاطي"
-],
-
-devices:[
-"TENS",
-"Ultrasound",
-"Hot Pack"
-],
-
-duration:"6 أسابيع - 3 جلسات أسبوعياً"
-
-};
-
-
-
-rehabPrograms["إصابات الكاحل"]={
-
-goals:[
-"تقليل الألم والتورم",
-"استعادة حركة الكاحل",
-"تحسين التوازن والمشي",
-"تقوية عضلات الساق"
-],
-
-exercises:[
-"تحريك القدم للأعلى والأسفل",
-"دوران الكاحل",
-"تمارين الشريط المطاطي للكاحل",
-"الوقوف على رجل واحدة",
-"تمارين المشي والتوازن"
-],
-
-devices:[
-"TENS",
-"Ultrasound",
-"Cryotherapy"
-],
-
-duration:"6 - 8 أسابيع حسب الحالة"
-
-};
 rehabPrograms["السكتة الدماغية"]={
 
 goals:[
@@ -538,6 +451,7 @@ duration:"حسب نوع المرض ودرجة الحالة"
 
 
 
+
 rehabPrograms["تأهيل عام"]={
 
 goals:[
@@ -614,7 +528,7 @@ data.notes || "--";
 
 // البحث عن البرنامج حسب التشخيص
 
-let program = rehabPrograms[data.diagnosis];
+let program = rehabPrograms[data.diagnosis] || rehabPrograms[data.category];
 
 
 
@@ -688,12 +602,9 @@ else{
 document.getElementById("plan").innerHTML =
 "لا توجد بيانات محفوظة";
 
+}
 
-}  
-  
-
-</div>
-  </script>
+</script>
 
 </body>
 
