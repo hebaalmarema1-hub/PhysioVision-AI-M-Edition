@@ -773,11 +773,7 @@ function saveResults(){
 
 let resultData = {
 
-category: evaluationData.category,
-
-diagnosis: evaluationData.diagnosis,
-
-joint: evaluationData.joint,
+...evaluationData,
 
 rom: maxROM - minROM,
 
