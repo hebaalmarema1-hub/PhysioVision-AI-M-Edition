@@ -482,12 +482,11 @@ duration:"حسب تقييم الحالة وخطة الأخصائي"
 };
 // جلب بيانات الحالة المحفوظة
 
-let data = JSON.parse(localStorage.getItem("resultData"));
+let savedData = localStorage.getItem("resultData");
 
+console.log("البيانات المحفوظة:", savedData);
 
-
-if(data){
-
+let data = JSON.parse(savedData);
 
 document.getElementById("category").innerHTML =
 data.category || "--";
