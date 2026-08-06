@@ -104,124 +104,103 @@ document.getElementById("reps").innerHTML=resultData.reps;
 
 document.getElementById("notes").innerHTML=resultData.notes;
 
+
+// قاعدة البروتوكولات
+
+const rehabProtocols = {
+
+
+"إصابة أوتار الكوع": {
+
+goals:[
+"تقليل الألم",
+"تحسين مدى الحركة",
+"زيادة القوة العضلية"
+],
+
+electrotherapy:[
+"TENS لتخفيف الألم",
+"NMES عند وجود ضعف عضلي"
+],
+
+exercises:[
+"تمارين مدى الحركة للكوع",
+"تمارين تقوية عضلات الذراع",
+"تمارين مقاومة تدريجية",
+"تمارين وظيفية"
+],
+
+devices:[
+"شريط مقاومة",
+"أوزان خفيفة",
+"جهاز تحفيز كهربائي"
+],
+
+notes:
+"تجنب الحركات التي تسبب ألم شديد"
+
 }
-let plan = "";
 
-if(resultData.joint.includes("كوع")){
+};
 
-plan = `
-<h3>خطة تأهيل الكوع</h3>
-<p>
-المرحلة: تحسين القوة والمحافظة على الحركة<br><br>
 
-التمارين:<br>
-✅ تمارين مدى الحركة للكوع<br>
-✅ تقوية عضلات الذراع<br>
-✅ تمارين مقاومة تدريجية<br>
-✅ تمارين وظيفية<br><br>
+// البحث عن البروتوكول
 
-الأجهزة:<br>
-- شريط مقاومة<br>
-- أوزان خفيفة<br>
-- جهاز تحفيز كهربائي عند الحاجة
-</p>
+let key = resultData.diagnosis + " " + resultData.joint;
+
+
+let selectedPlan = null;
+
+
+for(let protocol in rehabProtocols){
+
+if(key.includes(protocol.replace(" ","")) || 
+key.includes(protocol)){
+
+selectedPlan = rehabProtocols[protocol];
+
+}
+
+}
+
+
+// عرض الخطة
+
+if(selectedPlan){
+
+document.getElementById("rehabPlan").innerHTML = `
+
+<h3>🎯 أهداف العلاج</h3>
+<p>${selectedPlan.goals.join("<br>")}</p>
+
+
+<h3>⚡ العلاج الكهربائي</h3>
+<p>${selectedPlan.electrotherapy.join("<br>")}</p>
+
+
+<h3>🏃 التمارين</h3>
+<p>${selectedPlan.exercises.join("<br>")}</p>
+
+
+<h3>🏋️ الأجهزة المستخدمة</h3>
+<p>${selectedPlan.devices.join("<br>")}</p>
+
+
+<h3>⚠️ ملاحظات</h3>
+<p>${selectedPlan.notes}</p>
+
 `;
 
 }
 
-else if(resultData.joint.includes("رسغ")){
+else{
 
-plan = `
-<h3>خطة تأهيل الرسغ</h3>
-<p>
-التمارين:<br>
-✅ تمارين حركة الرسغ<br>
-✅ تقوية القبضة<br>
-✅ تمارين مقاومة<br><br>
-
-الأجهزة:<br>
-- كرة علاجية<br>
-- Hand gripper<br>
-- شريط مقاومة
-</p>
-`;
+document.getElementById("rehabPlan").innerHTML =
+"لم يتم العثور على بروتوكول مناسب لهذه الحالة حالياً";
 
 }
 
-else if(resultData.joint.includes("كتف")){
-
-plan = `
-<h3>خطة تأهيل الكتف</h3>
-<p>
-التمارين:<br>
-✅ تمارين مدى الحركة<br>
-✅ تقوية الكفة المدورة<br>
-✅ تمارين ثبات الكتف<br><br>
-
-الأجهزة:<br>
-- Pulley<br>
-- شريط مقاومة<br>
-- أوزان خفيفة
-</p>
-`;
-
 }
-
-else if(resultData.joint.includes("ورك")){
-
-plan = `
-<h3>خطة تأهيل الورك</h3>
-<p>
-التمارين:<br>
-✅ تقوية عضلات الحوض<br>
-✅ تمارين توازن<br>
-✅ تدريب المشي<br><br>
-
-الأجهزة:<br>
-- دراجة ثابتة<br>
-- جهاز مقاومة
-</p>
-`;
-
-}
-
-else if(resultData.joint.includes("ركبة")){
-
-plan = `
-<h3>خطة تأهيل الركبة</h3>
-<p>
-التمارين:<br>
-✅ تمارين مدى الحركة<br>
-✅ تقوية العضلة الرباعية<br>
-✅ تمارين توازن<br><br>
-
-الأجهزة:<br>
-- دراجة ثابتة<br>
-- جهاز مقاومة
-</p>
-`;
-
-}
-
-else if(resultData.joint.includes("كاحل")){
-
-plan = `
-<h3>خطة تأهيل الكاحل</h3>
-<p>
-التمارين:<br>
-✅ تمارين حركة الكاحل<br>
-✅ تقوية عضلات الساق<br>
-✅ تمارين توازن<br><br>
-
-الأجهزة:<br>
-- Balance board<br>
-- شريط مقاومة
-</p>
-`;
-
-}
-
-document.getElementById("rehabPlan").innerHTML = plan;
 </script>
 
 </body>
