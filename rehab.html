@@ -10,39 +10,20 @@
 <style>
 
 body{
-margin:0;
 font-family:Arial;
 background:linear-gradient(135deg,#0b1f3a,#1b6ca8);
 color:white;
 text-align:center;
-}
-
-.container{
-padding:40px 20px;
+padding:30px;
 }
 
 .card{
-
-background:rgba(255,255,255,.15);
-max-width:700px;
-margin:20px auto;
+background:#ffffff22;
 padding:25px;
 border-radius:20px;
+max-width:700px;
+margin:auto;
 text-align:right;
-
-}
-
-p{
-font-size:18px;
-line-height:2;
-}
-
-h1{
-font-size:35px;
-}
-
-h2{
-margin-bottom:20px;
 }
 
 </style>
@@ -53,440 +34,83 @@ margin-bottom:20px;
 <body>
 
 
-<div class="container">
-
-
 <h1>🏥 البرنامج التأهيلي المقترح</h1>
 
 
 <div class="card">
 
-<h2>📋 بيانات الحالة</h2>
+<p>نوع الحالة: <span id="category">--</span></p>
 
+<p>التشخيص: <span id="diagnosis">--</span></p>
 
-<p>
-نوع الحالة:
-<span id="category">--</span>
-</p>
+<p>الألم: <span id="pain">--</span></p>
 
+<hr>
 
-<p>
-التشخيص:
-<span id="diagnosis">--</span>
-</p>
-
-
-<p>
-المفصل:
-<span id="joint">--</span>
-</p>
-
-
-<p>
-درجة الألم:
-<span id="pain">--</span>
-</p>
-
-
-<p>
-قوة العضلة:
-<span id="strength">--</span>
-</p>
-
-
-<p>
-مدى الحركة:
-<span id="rom">--</span>
-</p>
-
-
-<p>
-عدد التكرارات:
-<span id="reps">--</span>
-</p>
-
-
-<p>
-جودة الأداء:
-<span id="quality">--</span>
-</p>
-
-
-<p>
-ملاحظات الذكاء الاصطناعي:
-<span id="aiNotes">--</span>
-</p>
-
-
-</div>
-
-
-
-<div class="card">
-
-<h2>📝 الخطة التأهيلية</h2>
-
+<h2>📝 الخطة</h2>
 
 <div id="plan">
-
-جاري إنشاء الخطة...
+جاري التحميل...
+</div>
 
 </div>
-</div>
+
 
 
 <script>
 
 
-const rehabPrograms = {
-
+const rehabPrograms={
 
 "خشونة الركبة":{
 
 goals:[
 "تقليل الألم",
 "زيادة مدى الحركة",
-"تقوية العضلة الرباعية",
-"تحسين التوازن"
+"تقوية العضلة الرباعية"
 ],
 
 exercises:[
-"Quadriceps setting",
 "Straight leg raise",
-"ثني ومد الركبة",
-"Half squat",
-"Step up"
+"Quadriceps setting",
+"تمارين التوازن"
 ],
 
-devices:[
-"TENS",
-"Ultrasound",
-"Hot Pack"
-],
-
-duration:"8 أسابيع - 3 جلسات أسبوعياً"
+duration:"8 أسابيع"
 
 },
 
 
-
-"باركنسون":{
-
-goals:[
-"تحسين المشي",
-"تحسين التوازن",
-"زيادة التحكم الحركي"
-],
-
-exercises:[
-"تدريب المشي",
-"تمارين التوازن",
-"تمارين التناسق الحركي"
-],
-
-devices:[
-"FES",
-"Biofeedback",
-"NMES"
-],
-
-duration:"12 أسبوع - حسب الحالة"
-
-};
-  
-  rehabPrograms["إصابات الكتف"]={
+"آلام أسفل الظهر":{
 
 goals:[
 "تقليل الألم",
-"استعادة مدى حركة الكتف",
-"تقوية عضلات الكتف ولوح الكتف"
-],
-
-exercises:[
-"تمرين البندول للكتف Pendulum",
-"رفع الذراع للأمام Shoulder flexion",
-"رفع الذراع للجانب Shoulder abduction",
-"الدوران الخارجي والداخلي",
-"تمارين الشريط المطاطي",
-"Wall slide"
-],
-
-devices:[
-"TENS",
-"Ultrasound",
-"Shockwave Therapy"
-],
-
-duration:"8 أسابيع - 3 جلسات أسبوعياً"
-
-};
-
-
-
-rehabPrograms["آلام أسفل الظهر"]={
-
-goals:[
-"تقليل الألم",
-"تحسين مرونة العمود الفقري",
-"تقوية عضلات البطن والظهر",
-"تحسين وضعية الجسم"
+"تحسين مرونة الظهر"
 ],
 
 exercises:[
 "Pelvic tilt",
-"Cat-Camel",
-"McKenzie exercise",
-"تقوية عضلات البطن",
-"تقوية عضلات الظهر",
 "تمارين الإطالة"
 ],
 
-devices:[
-"TENS",
-"IFC",
-"Traction"
-],
+duration:"6 أسابيع"
 
-duration:"6 - 8 أسابيع حسب الحالة"
-
-};
-
-
-rehabPrograms["بعد الكسور"]={
-
-goals:[
-"استعادة الحركة الطبيعية",
-"زيادة قوة العضلات",
-"تحسين المشي والتوازن"
-],
-
-exercises:[
-"تمارين مدى الحركة ROM",
-"تقوية العضلات",
-"المشي التدريجي",
-"نقل الوزن",
-"تمارين التوازن"
-],
-
-devices:[
-"NMES",
-"PEMF",
-"Hot Pack"
-],
-
-duration:"8 - 12 أسبوع حسب مرحلة الالتئام"
-
-};
-
-
-rehabPrograms["إصابات الكوع"]={
-
-goals:[
-"تقليل الألم",
-"استعادة حركة الكوع",
-"تقوية عضلات الذراع",
-"تحسين الوظيفة اليومية"
-],
-
-exercises:[
-"تمارين ثني ومد الكوع",
-"تمارين مدى الحركة ROM",
-"تمارين المقاومة الخفيفة",
-"تمارين الشريط المطاطي"
-],
-
-devices:[
-"TENS",
-"Ultrasound",
-"Hot Pack"
-],
-
-duration:"6 أسابيع - 3 جلسات أسبوعياً"
+}
 
 };
 
 
 
-rehabPrograms["إصابات الكاحل"]={
+// قراءة النتائج
 
-goals:[
-"تقليل الألم والتورم",
-"استعادة حركة الكاحل",
-"تحسين التوازن والمشي",
-"تقوية عضلات الساق"
-],
-
-exercises:[
-"تحريك القدم للأعلى والأسفل",
-"دوران الكاحل",
-"تمارين الشريط المطاطي للكاحل",
-"الوقوف على رجل واحدة",
-"تمارين المشي والتوازن"
-],
-
-devices:[
-"TENS",
-"Ultrasound",
-"Cryotherapy"
-],
-
-duration:"6 - 8 أسابيع حسب الحالة"
-
-};
-rehabPrograms["إصابات الركبة"]={
-
-goals:[
-"تقليل الألم والتورم",
-"استعادة مدى حركة الركبة",
-"تقوية عضلات الفخذ",
-"تحسين الثبات والتوازن"
-],
-
-exercises:[
-"Quadriceps setting",
-"Straight leg raise",
-"ثني ومد الركبة",
-"Half squat",
-"Step up",
-"تمارين التوازن على رجل واحدة"
-],
-
-devices:[
-"TENS",
-"NMES",
-"Ultrasound",
-"Cold Therapy"
-],
-
-duration:"6 - 8 أسابيع حسب شدة الإصابة"
-
-};
+let saved = localStorage.getItem("resultData");
 
 
-rehabPrograms["السكتة الدماغية"]={
-
-goals:[
-"تحسين التحكم الحركي",
-"استعادة القدرة على المشي",
-"تحسين التوازن",
-"تقليل ضعف الأطراف"
-],
-
-exercises:[
-"تدريب المشي",
-"تمارين نقل الوزن",
-"تمارين التوازن",
-"تمارين تقوية الأطراف",
-"تمارين التناسق الحركي",
-"تمارين التحكم في الحركة"
-],
-
-devices:[
-"FES",
-"NMES",
-"Biofeedback"
-],
-
-duration:"12 أسبوع أو حسب تطور الحالة"
-
-};
+if(saved){
 
 
+let data=JSON.parse(saved);
 
-rehabPrograms["الإصابات الرياضية"]={
-
-goals:[
-"العودة للنشاط الرياضي",
-"تقليل الألم والالتهاب",
-"استعادة القوة والمرونة",
-"تحسين الأداء الوظيفي"
-],
-
-exercises:[
-"تمارين الإطالة",
-"تمارين المقاومة الخفيفة",
-"تمارين التقوية بالأوزان",
-"تمارين التوازن",
-"تمارين العودة للنشاط الرياضي"
-],
-
-devices:[
-"Cryotherapy",
-"Ultrasound",
-"Shockwave Therapy"
-],
-
-duration:"6 - 12 أسبوع حسب نوع الإصابة"
-
-};
-
-
-
-rehabPrograms["الأمراض العصبية"]={
-
-goals:[
-"تحسين التحكم العصبي العضلي",
-"تحسين التوازن",
-"زيادة القدرة الوظيفية",
-"تحسين الحركة اليومية"
-],
-
-exercises:[
-"تمارين المشي",
-"تمارين التوازن",
-"تمارين التناسق الحركي",
-"تمارين التحكم في الحركة",
-"تمارين المرونة"
-],
-
-devices:[
-"FES",
-"Biofeedback",
-"NMES"
-],
-
-duration:"حسب نوع المرض ودرجة الحالة"
-
-};
-
-
-
-
-rehabPrograms["تأهيل عام"]={
-
-goals:[
-"تحسين الحركة العامة",
-"زيادة القوة العضلية",
-"تحسين التوازن والتوافق الحركي",
-"رفع القدرة الوظيفية"
-],
-
-exercises:[
-"تمارين الإطالة Stretching",
-"تمارين التقوية Strengthening",
-"تمارين التوازن Balance",
-"تمارين التوافق الحركي Coordination",
-"تمارين التحمل Endurance",
-"تمارين التدريب الوظيفي Functional training"
-],
-
-devices:[
-"TENS",
-"NMES",
-"Ultrasound",
-"Hot Pack"
-],
-
-duration:"حسب تقييم الحالة وخطة الأخصائي"
-
-};
-// جلب بيانات الحالة المحفوظة
-
-let savedData = localStorage.getItem("resultData");
-
-console.log("البيانات المحفوظة:", savedData);
-
-let data = JSON.parse(savedData);
 
 document.getElementById("category").innerHTML =
 data.category || "--";
@@ -496,103 +120,46 @@ document.getElementById("diagnosis").innerHTML =
 data.diagnosis || "--";
 
 
-document.getElementById("joint").innerHTML =
-data.joint || "--";
-
-
 document.getElementById("pain").innerHTML =
 data.pain || "--";
 
 
-document.getElementById("strength").innerHTML =
-data.muscleStrength || "--";
 
-
-document.getElementById("rom").innerHTML =
-(data.rom || "--") + " درجة";
-
-
-document.getElementById("reps").innerHTML =
-data.reps || "0";
-
-let program = 
+let program =
 rehabPrograms[data.diagnosis] ||
 rehabPrograms[data.category];
-document.getElementById("quality").innerHTML =
-data.quality || "--";
-
-
-document.getElementById("aiNotes").innerHTML =
-data.notes || "--";
-
-
-
-// البحث عن البرنامج حسب التشخيص
-
-let program = rehabPrograms[data.diagnosis] || rehabPrograms[data.category];
-
-
-
-let plan = "";
 
 
 
 if(program){
 
 
-plan = `
+document.getElementById("plan").innerHTML=`
+
+<h3>🎯 الأهداف</h3>
+
+${program.goals.join("<br>")}
 
 
-<h3>🎯 الأهداف العلاجية</h3>
+<h3>🏃 التمارين</h3>
 
-${program.goals.map(item=>"✅ "+item).join("<br>")}
-
-
-
-<br><br>
+${program.exercises.join("<br>")}
 
 
-<h3>🏃 التمارين المقترحة</h3>
-
-${program.exercises.map(item=>"🔹 "+item).join("<br>")}
-
-
-
-<br><br>
-
-
-<h3>⚡ الأجهزة والعلاج الكهربائي</h3>
-
-${program.devices.map(item=>"⚡ "+item).join("<br>")}
-
-
-
-<br><br>
-
-
-<h3>📅 مدة البرنامج</h3>
+<h3>📅 المدة</h3>
 
 ${program.duration}
 
-
 `;
 
-
 }
 
 else{
 
-
-plan =
-"لا يوجد برنامج تأهيلي محدد لهذه الحالة";
-
+document.getElementById("plan").innerHTML=
+"لا يوجد برنامج لهذه الحالة";
 
 }
-
-
-
-document.getElementById("plan").innerHTML = plan;
-
 
 
 }
@@ -600,12 +167,15 @@ document.getElementById("plan").innerHTML = plan;
 else{
 
 
-document.getElementById("plan").innerHTML =
-"لا توجد بيانات محفوظة";
+document.getElementById("plan").innerHTML=
+"لا توجد نتائج محفوظة";
 
 }
+
+
 
 </script>
+
 
 </body>
 
