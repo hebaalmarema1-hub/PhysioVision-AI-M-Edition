@@ -766,7 +766,17 @@ alert("تم الضغط على حفظ النتائج");
 
 let resultData = {
 
-...evaluationData,
+category: evaluationData.category,
+
+diagnosis: evaluationData.diagnosis,
+
+joint: evaluationData.joint,
+
+pain: evaluationData.pain,
+
+weight: evaluationData.weight || "--",
+
+strength: evaluationData.muscleStrength,
 
 rom: maxROM - minROM,
 
