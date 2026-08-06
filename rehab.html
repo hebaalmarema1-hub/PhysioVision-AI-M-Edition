@@ -308,22 +308,36 @@ notes:
 // البحث عن البروتوكول
 
 let key = resultData.diagnosis + " " + resultData.joint;
-  
-let selectedPlan = null;
 
+let selectedPlan = null;
 
 for(let protocol in rehabProtocols){
 
-if(key.includes(protocol.replace(" ","")) || 
-key.includes(protocol)){
-
+if(key.includes("كتف") && protocol.includes("كتف")){
 selectedPlan = rehabProtocols[protocol];
+}
 
+else if(key.includes("كوع") && protocol.includes("كوع")){
+selectedPlan = rehabProtocols[protocol];
+}
+
+else if(key.includes("رسغ") && protocol.includes("رسغ")){
+selectedPlan = rehabProtocols[protocol];
+}
+
+else if(key.includes("ورك") && protocol.includes("ورك")){
+selectedPlan = rehabProtocols[protocol];
+}
+
+else if(key.includes("ركبة") && protocol.includes("ركبة")){
+selectedPlan = rehabProtocols[protocol];
+}
+
+else if(key.includes("كاحل") && protocol.includes("كاحل")){
+selectedPlan = rehabProtocols[protocol];
 }
 
 }
-
-
 // عرض الخطة
 
 if(selectedPlan){
