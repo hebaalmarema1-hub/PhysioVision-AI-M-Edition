@@ -22,7 +22,7 @@ padding:40px 20px;
 }
 
 .card{
-background:rgba(255,255,255,.12);
+background:rgba(255,255,255,0.15);
 width:700px;
 max-width:95%;
 margin:20px auto;
@@ -32,336 +32,594 @@ text-align:right;
 }
 
 h1{
-margin-bottom:30px;
+text-align:center;
+}
+
+h2{
+color:white;
 }
 
 p{
-font-size:20px;
+font-size:18px;
 line-height:2;
+}
+
+.box{
+background:rgba(0,0,0,0.2);
+padding:15px;
+border-radius:15px;
+margin-top:15px;
 }
 
 </style>
 
 </head>
 
+
 <body>
 
 <div class="container">
 
 <h1>🏥 البرنامج التأهيلي المقترح</h1>
-
 <div class="card">
 
-<h2>بيانات الحالة</h2>
+<h2>📋 بيانات الحالة</h2>
 
-<p>الحالة: <span id="caseType">--</span></p>
+<div class="box">
 
-<p>التشخيص: <span id="diagnosis">--</span></p>
+<p>
+نوع الحالة:
+<span id="category">--</span>
+</p>
 
-<p>المفصل: <span id="joint">--</span></p>
+<p>
+التشخيص:
+<span id="diagnosis">--</span>
+</p>
 
-<p>مدى الحركة: <span id="rom">--</span></p>
+<p>
+المفصل:
+<span id="joint">--</span>
+</p>
 
-<p>التقييم: <span id="quality">--</span></p>
+<p>
+درجة الألم:
+<span id="pain">--</span>
+</p>
 
-<p>عدد التكرارات: <span id="reps">--</span></p>
+<p>
+الوزن:
+<span id="weight">--</span>
+</p>
 
-<p>ملاحظات الذكاء الاصطناعي: <span id="notes">--</span></p>
+<p>
+قوة العضلة:
+<span id="strength">--</span>
+</p>
+
+<p>
+مدى الحركة:
+<span id="rom">--</span>
+</p>
+
+<p>
+عدد التكرارات:
+<span id="reps">--</span>
+</p>
+
+<p>
+جودة الأداء:
+<span id="quality">--</span>
+</p>
+
+<p>
+ملاحظات الذكاء الاصطناعي:
+<span id="aiNotes">--</span>
+</p>
 
 </div>
 
+</div>
 <div class="card">
 
-<h2>📋 البرنامج التأهيلي</h2>
+<h2>📋 خطة التأهيل</h2>
 
 <div id="rehabPlan">
 
-بانتظار تحميل البرنامج...
+بانتظار إنشاء البرنامج التأهيلي...
 
 </div>
 
 </div>
-
-</div>
-
 <script>
 
-let resultData = JSON.parse(localStorage.getItem("resultData"));
+// قراءة البيانات المحفوظة من التقييم والتحليل
 
-if(resultData){
-
-document.getElementById("caseType").innerHTML=resultData.category;
-
-document.getElementById("diagnosis").innerHTML=resultData.diagnosis;
-
-document.getElementById("joint").innerHTML=resultData.joint;
-
-document.getElementById("rom").innerHTML=resultData.rom+"°";
-
-document.getElementById("quality").innerHTML=resultData.quality;
-
-document.getElementById("reps").innerHTML=resultData.reps;
-
-document.getElementById("notes").innerHTML=resultData.notes;
+let patientData = JSON.parse(localStorage.getItem("resultData"));
 
 
-// قاعدة البروتوكولات
+// التأكد من وجود البيانات
 
-const rehabProtocols = {
-"إصابة أوتار كتف": {
-  
-goals:[
-"تقليل الألم",
-"تحسين مدى حركة الكتف",
-"زيادة قوة عضلات الكفة المدورة",
-"تحسين ثبات المفصل"
-],
+if(patientData){
 
-electrotherapy:[
-"TENS لتخفيف الألم حسب الحالة",
-"NMES لتحفيز وتقوية العضلات الضعيفة"
-],
 
-exercises:[
-"تمارين مدى الحركة للكتف",
-"تمارين Pendulum",
-"تمارين تقوية الكفة المدورة",
-"تمارين مقاومة باستخدام الشريط المطاطي",
-"تمارين ثبات الكتف"
-],
+// عرض البيانات
 
-devices:[
-"Pulley جهاز البكرة",
-"TheraBand شريط مقاومة",
-"أوزان خفيفة",
-"جهاز تحفيز كهربائي عند الحاجة"
-],
+document.getElementById("category").innerHTML =
+patientData.category || "--";
 
-notes:
-"تجنب رفع الأوزان الثقيلة والحركات التي تزيد الألم"
-},
-"إصابة أوتار رسغ": {
-  
-goals:[
-"تقليل الألم والالتهاب",
-"تحسين مدى حركة الرسغ",
-"زيادة قوة عضلات اليد والقبضة",
-"استعادة الوظيفة اليومية"
-],
 
-electrotherapy:[
-"TENS لتخفيف الألم حسب الحالة",
-"NMES عند وجود ضعف عضلي"
-],
+document.getElementById("diagnosis").innerHTML =
+patientData.diagnosis || "--";
 
-exercises:[
-"تمارين مدى الحركة للرسغ",
-"تمارين ثني ومد الرسغ",
-"تمارين تقوية القبضة",
-"تمارين مقاومة باستخدام الشريط المطاطي",
-"تمارين وظيفية لليد"
-],
 
-devices:[
-"Hand Gripper جهاز تقوية القبضة",
-"كرة علاجية",
-"TheraBand شريط مقاومة",
-"أوزان خفيفة"
-],
+document.getElementById("joint").innerHTML =
+patientData.joint || "--";
 
-notes:
-"تجنب الضغط الزائد على الرسغ وتدرج في المقاومة"
-},
-"إصابة أوتار ورك": {
-  
-goals:[
-"تقليل الألم",
-"تحسين حركة مفصل الورك",
-"تقوية عضلات الحوض",
-"تحسين المشي والوظيفة"
-],
 
-electrotherapy:[
-"TENS لتخفيف الألم حسب الحاجة",
-"NMES عند وجود ضعف عضلي"
-],
+document.getElementById("pain").innerHTML =
+patientData.pain || "--";
 
-exercises:[
-"تمارين مدى الحركة للورك",
-"تمارين تقوية عضلات الحوض",
-"تمارين الجسر (Bridge)",
-"تمارين توازن",
-"تمارين وظيفية للمشي"
-],
 
-devices:[
-"دراجة ثابتة",
-"TheraBand شريط مقاومة",
-"أوزان خفيفة",
-"جهاز مقاومة"
-],
+document.getElementById("weight").innerHTML =
+patientData.weight || "--";
 
-notes:
-"تدرج في التمارين وتجنب الحركات التي تسبب ألم شديد"
 
-},
-"إصابة أوتار ركبة": {
+document.getElementById("strength").innerHTML =
+patientData.strength || "--";
 
-goals:[
-"تقليل الألم",
-"تحسين مدى حركة الركبة",
-"تقوية العضلة الرباعية وعضلات الفخذ",
-"تحسين الثبات والوظيفة"
-],
 
-electrotherapy:[
-"TENS لتخفيف الألم",
-"NMES لتحفيز وتقوية العضلة الرباعية عند الحاجة"
-],
+document.getElementById("rom").innerHTML =
+patientData.rom || "--";
 
-exercises:[
-"تمارين مدى الحركة للركبة",
-"تمارين تقوية العضلة الرباعية",
-"تمارين Isometric",
-"تمارين مقاومة تدريجية",
-"تمارين توازن وتحكم"
-],
 
-devices:[
-"دراجة ثابتة",
-"Leg Press حسب الحالة",
-"TheraBand شريط مقاومة",
-"أوزان خفيفة"
-],
+document.getElementById("reps").innerHTML =
+patientData.reps || "--";
 
-notes:
-"يجب زيادة الحمل تدريجياً وتجنب الألم أثناء التمرين"
 
-},  
-"إصابة أوتار كاحل": {
+document.getElementById("quality").innerHTML =
+patientData.quality || "--";
 
-goals:[
-"تقليل الألم والتورم",
-"تحسين مدى حركة الكاحل",
-"تقوية عضلات الساق",
-"تحسين التوازن والمشي"
-],
 
-electrotherapy:[
-"TENS لتخفيف الألم حسب الحالة",
-"NMES عند وجود ضعف عضلي"
-],
+document.getElementById("aiNotes").innerHTML =
+patientData.notes || "--";
 
-exercises:[
-"تمارين حركة الكاحل",
-"تمارين تقوية عضلات الساق",
-"تمارين مقاومة بالشريط المطاطي",
-"تمارين توازن",
-"تمارين المشي التدريجي"
-],
-
-devices:[
-"Balance Board لوح التوازن",
-"TheraBand شريط مقاومة",
-"كرة علاجية",
-"جهاز مقاومة"
-],
-
-notes:
-"تجنب التحميل الزائد خاصة في المراحل الأولى من الإصابة"
-
-},  
-"إصابة أوتار كوع": {
-
-goals:[
-"تقليل الألم",
-"تحسين مدى الحركة",
-"زيادة القوة العضلية"
-],
-
-electrotherapy:[
-"TENS لتخفيف الألم",
-"NMES عند وجود ضعف عضلي"
-],
-
-exercises:[
-"تمارين مدى الحركة للكوع",
-"تمارين تقوية عضلات الذراع",
-"تمارين مقاومة تدريجية",
-"تمارين وظيفية"
-],
-
-devices:[
-"شريط مقاومة",
-"أوزان خفيفة",
-"جهاز تحفيز كهربائي"
-],
-
-notes:
-"تجنب الحركات التي تسبب ألم شديد"
 
 }
+// إنشاء البرنامج التأهيلي
+
+let rehabPlan = {
+
+goals:[],
+
+exercises:[],
+
+devices:[],
+
+electrotherapy:[],
+
+notes:[]
 
 };
 
 
-// البحث عن البروتوكول
+// متغيرات لتسهيل القراءة
 
-let key = resultData.diagnosis + " " + resultData.joint;
+let category = patientData.category;
 
-let selectedPlan = null;
+let diagnosis = patientData.diagnosis;
 
-for(let protocol in rehabProtocols){
+let joint = patientData.joint;
 
-if(key.includes("كتف") && protocol.includes("كتف")){
-selectedPlan = rehabProtocols[protocol];
+let pain = patientData.pain;
+
+let strength = patientData.strength;
+
+let rom = patientData.rom;
+
+let quality = patientData.quality;
+
+let reps = patientData.reps;
+  // نوع الحالة
+
+if(category === "إصابات عظام"){
+
+rehabPlan.goals.push(
+"تقليل الألم",
+"استعادة مدى الحركة",
+"تحسين القوة العضلية",
+"استعادة الوظيفة الطبيعية"
+);
+
+rehabPlan.electrotherapy.push(
+"TENS",
+"NMES",
+"الأشعة تحت الحمراء حسب الحاجة"
+);
+
 }
 
-else if(key.includes("كوع") && protocol.includes("كوع")){
-selectedPlan = rehabProtocols[protocol];
-}
+else if(category === "إصابات رياضية"){
 
-else if(key.includes("رسغ") && protocol.includes("رسغ")){
-selectedPlan = rehabProtocols[protocol];
-}
+rehabPlan.goals.push(
+"العودة للنشاط الرياضي",
+"تحسين القوة",
+"تحسين المرونة",
+"منع تكرار الإصابة"
+);
 
-else if(key.includes("ورك") && protocol.includes("ورك")){
-selectedPlan = rehabProtocols[protocol];
-}
-
-else if(key.includes("ركبة") && protocol.includes("ركبة")){
-selectedPlan = rehabProtocols[protocol];
-}
-
-else if(key.includes("كاحل") && protocol.includes("كاحل")){
-selectedPlan = rehabProtocols[protocol];
-}
+rehabPlan.electrotherapy.push(
+"TENS",
+"NMES",
+"Cryotherapy أو Heat Therapy حسب الحالة"
+);
 
 }
-// عرض الخطة
 
-if(selectedPlan){
+else if(category === "الأمراض العصبية"){
+
+rehabPlan.goals.push(
+"تحسين التحكم الحركي",
+"تحسين التوازن",
+"زيادة الاستقلالية",
+"تحسين المشي"
+);
+
+rehabPlan.electrotherapy.push(
+"NMES",
+"FES عند الحاجة",
+"TENS إذا كان هناك ألم"
+);
+
+}
+
+else if(category === "ما بعد عمليات"){
+
+rehabPlan.goals.push(
+"حماية مكان العملية",
+"استعادة الحركة",
+"تقوية العضلات تدريجياً",
+"تقليل التورم"
+);
+
+rehabPlan.electrotherapy.push(
+"TENS",
+"NMES",
+"الأشعة تحت الحمراء حسب المرحلة"
+);
+
+}
+
+else if(category === "تأهيل أطفال"){
+
+rehabPlan.goals.push(
+"تطوير المهارات الحركية",
+"تحسين التوازن",
+"تحسين التناسق",
+"زيادة الاستقلالية"
+);
+
+}
+
+else if(category === "تأهيل كبار سن"){
+
+rehabPlan.goals.push(
+"منع السقوط",
+"تحسين التوازن",
+"زيادة القوة",
+"تحسين المشي"
+);
+
+rehabPlan.electrotherapy.push(
+"TENS",
+"NMES حسب الحاجة"
+);
+
+}
+  // التشخيص
+
+if(diagnosis === "خشونة ركبة"){
+
+rehabPlan.exercises.push(
+"تمارين مدى الحركة",
+"تقوية العضلة الرباعية",
+"تمارين الإطالة",
+"تمارين التوازن"
+);
+
+rehabPlan.devices.push(
+"دراجة ثابتة",
+"TheraBand",
+"Leg Press حسب الحالة"
+);
+
+}
+
+else if(diagnosis === "إصابة أربطة"){
+
+rehabPlan.exercises.push(
+"تمارين ROM",
+"تمارين الثبات",
+"تمارين التقوية التدريجية",
+"تمارين Proprioception"
+);
+
+rehabPlan.devices.push(
+"TheraBand",
+"Balance Board",
+"Pulley حسب المفصل"
+);
+
+}
+
+else if(diagnosis === "ألم أسفل ظهر"){
+
+rehabPlan.exercises.push(
+"McKenzie Exercises",
+"Core Stability",
+"إطالة عضلات أسفل الظهر",
+"تمارين الوضعية الصحيحة"
+);
+
+rehabPlan.devices.push(
+"TENS",
+"الأشعة تحت الحمراء"
+);
+
+}
+
+else if(diagnosis === "باركنسون"){
+
+rehabPlan.exercises.push(
+"تمارين التوازن",
+"تدريب المشي",
+"تمارين التنسيق الحركي",
+"تمارين الإطالة"
+);
+
+rehabPlan.devices.push(
+"Walker عند الحاجة",
+"Parallel Bars",
+"NMES حسب الحالة"
+);
+
+}
+
+else if(diagnosis === "السكتة الدماغية"){
+
+rehabPlan.exercises.push(
+"تمارين عصبية",
+"تدريب وظيفي",
+"تمارين التوازن",
+"تدريب المشي"
+);
+
+rehabPlan.devices.push(
+"Parallel Bars",
+"NMES",
+"FES"
+);
+
+}
+
+else if(diagnosis === "ما بعد الكسور"){
+
+rehabPlan.exercises.push(
+"ROM تدريجي",
+"تقوية تدريجية",
+"تمارين وظيفية"
+);
+
+rehabPlan.devices.push(
+"TheraBand",
+"أوزان خفيفة"
+);
+
+}
+
+else if(diagnosis === "عمليات جراحية"){
+
+rehabPlan.exercises.push(
+"ROM حسب البروتوكول",
+"تقوية تدريجية",
+"تمارين وظيفية"
+);
+
+rehabPlan.devices.push(
+"TENS",
+"NMES",
+"الأشعة تحت الحمراء حسب المرحلة"
+);
+
+}
+  // المفصل أو المنطقة
+
+if(joint === "كتف"){
+
+rehabPlan.exercises.push(
+"Pendulum",
+"تمارين الكفة المدورة",
+"تمارين ثبات الكتف"
+);
+
+rehabPlan.devices.push(
+"Pulley",
+"Shoulder Wheel"
+);
+
+}
+
+else if(joint === "كوع"){
+
+rehabPlan.exercises.push(
+"ثني ومد الكوع",
+"تمارين الساعد",
+"تمارين مقاومة تدريجية"
+);
+
+rehabPlan.devices.push(
+"TheraBand",
+"أوزان خفيفة"
+);
+
+}
+
+else if(joint === "رسغ"){
+
+rehabPlan.exercises.push(
+"ثني ومد الرسغ",
+"تقوية القبضة",
+"تمارين المهارات الدقيقة"
+);
+
+rehabPlan.devices.push(
+"Hand Gripper",
+"كرة علاجية"
+);
+
+}
+
+else if(joint === "ورك"){
+
+rehabPlan.exercises.push(
+"Bridge",
+"Hip Abduction",
+"Hip Extension"
+);
+
+rehabPlan.devices.push(
+"دراجة ثابتة",
+"TheraBand"
+);
+
+}
+
+else if(joint === "ركبة"){
+
+rehabPlan.exercises.push(
+"Straight Leg Raise",
+"Mini Squat",
+"Quad Set"
+);
+
+rehabPlan.devices.push(
+"دراجة ثابتة",
+"Leg Press"
+);
+
+}
+
+else if(joint === "كاحل"){
+
+rehabPlan.exercises.push(
+"Ankle ROM",
+"Heel Raise",
+"تمارين التوازن"
+);
+
+rehabPlan.devices.push(
+"Balance Board",
+"TheraBand"
+);
+
+}
+
+else if(joint === "ظهر"){
+
+rehabPlan.exercises.push(
+"McKenzie",
+"Core Stability",
+"Stretching"
+);
+
+rehabPlan.devices.push(
+"Swiss Ball",
+"TENS"
+);
+
+}
+  // نتائج التحليل
+
+// الألم
+
+if(Number(pain) >= 7){
+
+rehabPlan.notes.push("الألم مرتفع، يفضل البدء بتمارين خفيفة.");
+
+rehabPlan.electrotherapy.push(
+"TENS لتخفيف الألم",
+"الأشعة تحت الحمراء حسب الحاجة"
+);
+
+}
+
+
+// قوة العضلة
+
+if(strength === "ضعيف" || Number(strength) <= 2){
+
+rehabPlan.goals.push("زيادة القوة العضلية");
+
+rehabPlan.exercises.push(
+"تمارين Isometric",
+"تقوية تدريجية"
+);
+
+}
+
+
+// مدى الحركة
+
+if(Number(rom) < 90){
+
+rehabPlan.goals.push("تحسين مدى الحركة");
+
+rehabPlan.exercises.push(
+"تمارين ROM",
+"تمارين الإطالة"
+);
+
+}
+
+
+// جودة الأداء
+
+if(quality === "ضعيف"){
+
+rehabPlan.notes.push(
+"يجب تصحيح الأداء الحركي قبل زيادة شدة التمارين."
+);
+
+}
+
+
+// عدد التكرارات
+
+if(Number(reps) < 10){
+
+rehabPlan.notes.push(
+"زيادة التكرارات تدريجياً حسب تحمل المريض."
+);
+
+}
+  // عرض البرنامج التأهيلي
 
 document.getElementById("rehabPlan").innerHTML = `
 
-<h3>🎯 أهداف العلاج</h3>
-<p>${selectedPlan.goals.join("<br>")}</p>
+<h3>🎯 أهداف التأهيل</h3>
+<p>${rehabPlan.goals.join("<br>")}</p>
 
+<h3>🏃 التمارين العلاجية</h3>
+<p>${rehabPlan.exercises.join("<br>")}</p>
 
-<h3>⚡ العلاج الكهربائي</h3>
-<p>${selectedPlan.electrotherapy.join("<br>")}</p>
-
-
-<h3>🏃 التمارين</h3>
-<p>${selectedPlan.exercises.join("<br>")}</p>
-
+<h3>⚡ العلاج الكهربائي والأجهزة</h3>
+<p>${rehabPlan.electrotherapy.join("<br>")}</p>
 
 <h3>🏋️ الأجهزة المستخدمة</h3>
-<p>${selectedPlan.devices.join("<br>")}</p>
-
+<p>${rehabPlan.devices.join("<br>")}</p>
 
 <h3>⚠️ ملاحظات</h3>
-<p>${selectedPlan.notes}</p>
+<p>${rehabPlan.notes.join("<br>")}</p>
 
 `;
 
@@ -370,11 +628,10 @@ document.getElementById("rehabPlan").innerHTML = `
 else{
 
 document.getElementById("rehabPlan").innerHTML =
-"لم يتم العثور على بروتوكول مناسب لهذه الحالة حالياً";
+"لا توجد بيانات محفوظة.";
 
 }
 
-}
 </script>
 
 </body>
