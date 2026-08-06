@@ -766,17 +766,7 @@ alert("تم الضغط على حفظ النتائج");
 
 let resultData = {
 
-category: evaluationData.category,
-
-diagnosis: evaluationData.diagnosis,
-
-joint: evaluationData.joint,
-
-pain: evaluationData.pain,
-
-weight: evaluationData.weight || "--",
-
-strength: evaluationData.muscleStrength,
+...evaluationData,
 
 rom: maxROM - minROM,
 
@@ -790,17 +780,9 @@ notes: document.getElementById("notes").innerText
 
 localStorage.setItem("resultData", JSON.stringify(resultData));
 
-alert(JSON.stringify(resultData));
-
 window.location.href="rehab.html";
 
 }
-localStorage.setItem("resultData", JSON.stringify(resultData));
-
-window.location.href = "rehab.html";
-
-}
-
 </script>
 
 
