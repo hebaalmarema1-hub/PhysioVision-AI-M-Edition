@@ -68,21 +68,43 @@ PhysioVision AI – M² Edition
 
 <div class="box">
 
-<input type="text" placeholder="اسم المستخدم">
+<input id="username" type="text" placeholder="اسم المستخدم">
 
-<input type="password" placeholder="كلمة المرور">
-
+<input id="password" type="password" placeholder="كلمة المرور">
 <br>
 
-<<a href="dashboard.html">
-<button>
+
+<button onclick="loginDoctor()">
 دخول
 </button>
-</a>
-</div>
 
 </div>
 
+</div>
+<script>
+
+function loginDoctor(){
+
+let username = document.getElementById("username").value;
+let password = document.getElementById("password").value;
+
+
+if(username === "" || password === ""){
+
+alert("يرجى إدخال اسم المستخدم وكلمة المرور");
+
+return;
+
+}
+
+
+localStorage.setItem("doctorLogin", username);
+
+window.location.href="dashboard.html";
+
+}
+
+</script>
 </body>
 
 </html>
