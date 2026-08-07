@@ -9,48 +9,99 @@
 
 <style>
 
+*{
+box-sizing:border-box;
+}
+
 body{
 margin:0;
-font-family:"Arial", sans-serif;
-background:linear-gradient(135deg,#0b1f3a,#1b6ca8);
+font-family:"Arial",sans-serif;
+background:linear-gradient(135deg,#06152b,#0b1f3a,#1b6ca8);
 color:white;
 text-align:center;
+min-height:100vh;
+overflow-x:hidden;
 }
+
+/* شاشة الترحيب */
+
+.intro{
+position:fixed;
+inset:0;
+display:flex;
+align-items:center;
+justify-content:center;
+background:linear-gradient(135deg,#06152b,#0b1f3a,#1b6ca8);
+z-index:10;
+animation:introFade 1s ease forwards;
+animation-delay:3.5s;
+}
+
+.intro h1{
+font-size:55px;
+margin:0;
+opacity:0;
+animation:welcomeShow 2s ease forwards;
+text-shadow:0 0 25px rgba(255,255,255,0.35);
+}
+
+/* المحتوى */
 
 .welcome-container{
 max-width:900px;
 margin:auto;
 padding:70px 25px;
+opacity:0;
+animation:contentShow 1.5s ease forwards;
+animation-delay:3.8s;
 }
 
 .welcome-card{
-background:rgba(255,255,255,0.12);
-backdrop-filter:blur(10px);
+background:rgba(255,255,255,0.10);
+backdrop-filter:blur(12px);
 padding:45px;
 border-radius:30px;
-box-shadow:0 10px 40px rgba(0,0,0,0.25);
+box-shadow:0 15px 50px rgba(0,0,0,0.3);
 }
 
-h1{
-font-size:42px;
+.main-title{
+font-size:45px;
 margin-bottom:10px;
+opacity:0;
+animation:slideUp 1s ease forwards;
+animation-delay:4.2s;
 }
 
 .edition{
-font-size:24px;
+font-size:25px;
 margin-bottom:35px;
+opacity:0;
+animation:slideUp 1s ease forwards;
+animation-delay:4.6s;
 }
 
 .quote{
-font-size:25px;
+font-size:26px;
 font-weight:bold;
 line-height:1.8;
 margin:30px 0;
+opacity:0;
+animation:slideUp 1s ease forwards;
+animation-delay:5s;
 }
 
 .description{
 font-size:20px;
 line-height:2;
+opacity:0;
+animation:slideUp 1s ease forwards;
+animation-delay:5.4s;
+}
+
+.features-title{
+opacity:0;
+animation:slideUp 1s ease forwards;
+animation-delay:5.8s;
 }
 
 .features{
@@ -59,32 +110,75 @@ line-height:2.2;
 margin:25px 0;
 }
 
+.features p{
+opacity:0;
+animation:slideRight 0.8s ease forwards;
+}
+
+.features p:nth-child(1){
+animation-delay:6.2s;
+}
+
+.features p:nth-child(2){
+animation-delay:6.5s;
+}
+
+.features p:nth-child(3){
+animation-delay:6.8s;
+}
+
+.features p:nth-child(4){
+animation-delay:7.1s;
+}
+
 .final-quote{
 font-size:24px;
 font-weight:bold;
 margin:35px 0;
+opacity:0;
+animation:slideUp 1s ease forwards;
+animation-delay:7.5s;
 }
 
 hr{
 border:0;
 border-top:1px solid rgba(255,255,255,0.3);
 margin:35px 0;
+opacity:0;
+animation:fadeIn 1s ease forwards;
+animation-delay:7.9s;
 }
 
 .platform-name{
 font-size:22px;
 font-weight:bold;
+opacity:0;
+animation:fadeIn 1s ease forwards;
+animation-delay:8.2s;
 }
 
 .platform-subtitle{
 font-size:17px;
 font-style:italic;
+opacity:0;
+animation:fadeIn 1s ease forwards;
+animation-delay:8.5s;
 }
 
 .author{
 font-size:18px;
 margin-top:25px;
 font-weight:bold;
+opacity:0;
+animation:fadeIn 1s ease forwards;
+animation-delay:8.8s;
+}
+
+.continue-btn{
+display:inline-block;
+opacity:0;
+animation:buttonShow 1s ease forwards;
+animation-delay:9.2s;
 }
 
 button{
@@ -96,10 +190,109 @@ border-radius:30px;
 font-size:19px;
 cursor:pointer;
 margin-top:25px;
+transition:0.3s;
 }
 
 button:hover{
-transform:scale(1.05);
+transform:scale(1.07);
+box-shadow:0 8px 25px rgba(255,255,255,0.25);
+}
+
+
+/* التأثيرات */
+
+@keyframes welcomeShow{
+
+0%{
+opacity:0;
+transform:scale(0.8);
+}
+
+100%{
+opacity:1;
+transform:scale(1);
+}
+
+}
+
+@keyframes introFade{
+
+0%{
+opacity:1;
+visibility:visible;
+}
+
+100%{
+opacity:0;
+visibility:hidden;
+}
+
+}
+
+@keyframes contentShow{
+
+from{
+opacity:0;
+}
+
+to{
+opacity:1;
+}
+
+}
+
+@keyframes slideUp{
+
+from{
+opacity:0;
+transform:translateY(30px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+@keyframes slideRight{
+
+from{
+opacity:0;
+transform:translateX(40px);
+}
+
+to{
+opacity:1;
+transform:translateX(0);
+}
+
+}
+
+@keyframes fadeIn{
+
+from{
+opacity:0;
+}
+
+to{
+opacity:1;
+}
+
+}
+
+@keyframes buttonShow{
+
+from{
+opacity:0;
+transform:scale(0.8);
+}
+
+to{
+opacity:1;
+transform:scale(1);
+}
+
 }
 
 </style>
@@ -109,11 +302,27 @@ transform:scale(1.05);
 
 <body>
 
+
+<!-- شاشة الترحيب الأولى -->
+
+<div class="intro">
+
+<h1>🏥 مرحباً بكم</h1>
+
+</div>
+
+
+<!-- الصفحة الرئيسية للترحيب -->
+
 <div class="welcome-container">
 
 <div class="welcome-card">
 
-<h1>🏥 مرحباً بكم في PhysioVision AI</h1>
+
+<h1 class="main-title">
+PhysioVision AI
+</h1>
+
 
 <div class="edition">
 M² Edition
@@ -136,7 +345,9 @@ M² Edition
 </p>
 
 
-<h2>تسعى المنصة إلى تطوير تجربة العلاج الطبيعي عبر:</h2>
+<h2 class="features-title">
+تسعى المنصة إلى تطوير تجربة العلاج الطبيعي عبر:
+</h2>
 
 
 <div class="features">
@@ -163,18 +374,27 @@ M² Edition
 
 
 <div class="platform-name">
+
 PhysioVision AI – M² Edition
+
 </div>
 
+
 <div class="platform-subtitle">
+
 Smart Movement Analysis & Rehabilitation Platform
+
 </div>
 
 
 <div class="author">
+
 إعداد وتصميم: منة الله المريمي
+
 </div>
 
+
+<div class="continue-btn">
 
 <a href="login.html">
 
@@ -184,10 +404,13 @@ Smart Movement Analysis & Rehabilitation Platform
 
 </a>
 
+</div>
+
 
 </div>
 
 </div>
+
 
 </body>
 
