@@ -120,12 +120,33 @@ PhysioVision AI – M² Edition
 
 document.getElementById("savePatient").onclick = function(){
 
+let patientData = {
+
+name: document.querySelector('input[placeholder="الاسم الكامل"]').value,
+
+age: document.querySelector('input[placeholder="العمر"]').value,
+
+gender: document.querySelector("select").value,
+
+fileNumber: document.querySelector('input[placeholder="رقم الملف"]').value,
+
+phone: document.querySelector('input[placeholder="رقم الهاتف"]').value
+
+};
+
+
+localStorage.setItem(
+"patientData",
+JSON.stringify(patientData)
+);
+
+
 alert("تم حفظ ملف المريض ✅");
+
 
 window.location.href="evaluation.html";
 
 };
-
 
 document.getElementById("backBtn").onclick = function(){
 
