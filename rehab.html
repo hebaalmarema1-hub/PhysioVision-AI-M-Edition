@@ -434,16 +434,33 @@ duration:"6 - 12 أسبوع حسب شدة الإصابة"
 
 
 
-// قراءة النتائج
+// قراءة كل بيانات المريض والتقييم والتحليل
 
-let saved = localStorage.getItem("resultData");
+let patientData = JSON.parse(
+localStorage.getItem("patientData")
+) || {};
 
 
-if(saved){
+let evaluationData = JSON.parse(
+localStorage.getItem("evaluationData")
+) || {};
 
 
-let data=JSON.parse(saved);
+let resultData = JSON.parse(
+localStorage.getItem("resultData")
+) || {};
 
+
+// دمج كل النتائج
+
+let data = {
+...patientData,
+...evaluationData,
+...resultData
+};
+
+
+// عرض البيانات
 
 document.getElementById("category").innerHTML =
 data.category || "--";
@@ -458,14 +475,16 @@ data.pain || "--";
 
 
 
+// اختيار البرنامج
+
 let program =
 rehabPrograms[data.diagnosis] ||
+rehabPrograms[data.joint] ||
 rehabPrograms[data.category];
 
 
 
 if(program){
-
 
 document.getElementById("plan").innerHTML=`
 
@@ -489,19 +508,8 @@ ${program.duration}
 
 else{
 
-document.getElementById("plan").innerHTML=
+document.getElementById("plan").innerHTML =
 "لا يوجد برنامج لهذه الحالة";
-
-}
-
-
-}
-
-else{
-
-
-document.getElementById("plan").innerHTML=
-"لا توجد نتائج محفوظة";
 
 }
 function goReports(){
