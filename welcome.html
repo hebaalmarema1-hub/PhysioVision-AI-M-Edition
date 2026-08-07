@@ -5,7 +5,7 @@
 
 <meta charset="UTF-8">
 
-<title>مرحباً بكم - PhysioVision AI</title>
+<title>PhysioVision AI - M² Edition</title>
 
 <style>
 
@@ -16,14 +16,15 @@ box-sizing:border-box;
 body{
 margin:0;
 font-family:"Arial",sans-serif;
-background:linear-gradient(135deg,#06152b,#0b1f3a,#1b6ca8);
+background:
+radial-gradient(circle at top,#1b6ca8 0%,#0b1f3a 45%,#06152b 100%);
 color:white;
 text-align:center;
 min-height:100vh;
 overflow-x:hidden;
 }
 
-/* شاشة الترحيب */
+/* شاشة البداية */
 
 .intro{
 position:fixed;
@@ -31,24 +32,24 @@ inset:0;
 display:flex;
 align-items:center;
 justify-content:center;
-background:linear-gradient(135deg,#06152b,#0b1f3a,#1b6ca8);
-z-index:10;
-animation:introFade 1s ease forwards;
+background:#06152b;
+z-index:20;
+animation:introFade 1.5s ease forwards;
 animation-delay:3.5s;
 }
 
 .intro h1{
-font-size:55px;
-margin:0;
+font-size:58px;
+letter-spacing:1px;
 opacity:0;
 animation:welcomeShow 2s ease forwards;
-text-shadow:0 0 25px rgba(255,255,255,0.35);
+text-shadow:0 0 30px rgba(255,255,255,.35);
 }
 
 /* المحتوى */
 
 .welcome-container{
-max-width:900px;
+max-width:950px;
 margin:auto;
 padding:70px 25px;
 opacity:0;
@@ -57,16 +58,19 @@ animation-delay:3.8s;
 }
 
 .welcome-card{
-background:rgba(255,255,255,0.10);
-backdrop-filter:blur(12px);
-padding:45px;
-border-radius:30px;
-box-shadow:0 15px 50px rgba(0,0,0,0.3);
+background:rgba(255,255,255,.09);
+backdrop-filter:blur(15px);
+padding:50px;
+border:1px solid rgba(255,255,255,.18);
+border-radius:32px;
+box-shadow:
+0 20px 70px rgba(0,0,0,.35),
+inset 0 1px rgba(255,255,255,.15);
 }
 
 .main-title{
-font-size:45px;
-margin-bottom:10px;
+font-size:48px;
+margin:0 0 10px;
 opacity:0;
 animation:slideUp 1s ease forwards;
 animation-delay:4.2s;
@@ -74,6 +78,7 @@ animation-delay:4.2s;
 
 .edition{
 font-size:25px;
+letter-spacing:3px;
 margin-bottom:35px;
 opacity:0;
 animation:slideUp 1s ease forwards;
@@ -81,9 +86,9 @@ animation-delay:4.6s;
 }
 
 .quote{
-font-size:26px;
+font-size:27px;
 font-weight:bold;
-line-height:1.8;
+line-height:1.9;
 margin:30px 0;
 opacity:0;
 animation:slideUp 1s ease forwards;
@@ -92,110 +97,162 @@ animation-delay:5s;
 
 .description{
 font-size:20px;
-line-height:2;
+line-height:2.1;
 opacity:0;
 animation:slideUp 1s ease forwards;
 animation-delay:5.4s;
 }
 
+/* عنوان المميزات */
+
 .features-title{
+font-size:25px;
+margin-top:45px;
 opacity:0;
-animation:slideUp 1s ease forwards;
+animation:titleReveal 1.2s ease forwards;
 animation-delay:5.8s;
 }
 
+/* بطاقات المميزات */
+
 .features{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:18px;
+margin-top:30px;
+}
+
+.feature{
+background:rgba(255,255,255,.08);
+border:1px solid rgba(255,255,255,.14);
+border-radius:22px;
+padding:25px 20px;
 font-size:19px;
-line-height:2.2;
-margin:25px 0;
-}
+line-height:1.8;
+min-height:120px;
 
-.features p{
 opacity:0;
-animation:slideRight 0.8s ease forwards;
+transform:translateY(40px) scale(.95);
+transition:.4s;
 }
 
-.features p:nth-child(1){
+.feature:hover{
+transform:translateY(-6px) scale(1.02);
+background:rgba(255,255,255,.14);
+box-shadow:0 12px 35px rgba(0,0,0,.25);
+}
+
+.feature:nth-child(1){
+animation:cardReveal 1s ease forwards;
 animation-delay:6.2s;
 }
 
-.features p:nth-child(2){
-animation-delay:6.5s;
+.feature:nth-child(2){
+animation:cardReveal 1s ease forwards;
+animation-delay:6.6s;
 }
 
-.features p:nth-child(3){
-animation-delay:6.8s;
+.feature:nth-child(3){
+animation:cardReveal 1s ease forwards;
+animation-delay:7s;
 }
 
-.features p:nth-child(4){
-animation-delay:7.1s;
+.feature:nth-child(4){
+animation:cardReveal 1s ease forwards;
+animation-delay:7.4s;
 }
+
+/* الجملة الأخيرة */
 
 .final-quote{
-font-size:24px;
+font-size:25px;
 font-weight:bold;
-margin:35px 0;
+line-height:1.9;
+margin:50px 0 35px;
 opacity:0;
-animation:slideUp 1s ease forwards;
-animation-delay:7.5s;
-}
-
-hr{
-border:0;
-border-top:1px solid rgba(255,255,255,0.3);
-margin:35px 0;
-opacity:0;
-animation:fadeIn 1s ease forwards;
+animation:glowReveal 1.5s ease forwards;
 animation-delay:7.9s;
 }
 
+/* الخط */
+
+hr{
+border:0;
+height:1px;
+background:linear-gradient(
+to left,
+transparent,
+rgba(255,255,255,.5),
+transparent
+);
+margin:40px 0;
+opacity:0;
+animation:fadeIn 1s ease forwards;
+animation-delay:8.4s;
+}
+
+/* اسم المنصة */
+
 .platform-name{
-font-size:22px;
+font-size:23px;
 font-weight:bold;
 opacity:0;
 animation:fadeIn 1s ease forwards;
-animation-delay:8.2s;
+animation-delay:8.7s;
 }
 
 .platform-subtitle{
 font-size:17px;
 font-style:italic;
+margin-top:8px;
 opacity:0;
 animation:fadeIn 1s ease forwards;
-animation-delay:8.5s;
+animation-delay:9s;
 }
+
+/* إعداد وتصميم */
 
 .author{
-font-size:18px;
-margin-top:25px;
+display:inline-block;
+margin-top:30px;
+padding:14px 30px;
+border-radius:30px;
+border:1px solid rgba(255,255,255,.3);
+background:rgba(255,255,255,.08);
+font-size:19px;
 font-weight:bold;
+
 opacity:0;
-animation:fadeIn 1s ease forwards;
-animation-delay:8.8s;
+transform:scale(.8);
+animation:authorReveal 1.4s ease forwards;
+animation-delay:9.4s;
 }
 
+/* زر المتابعة */
+
 .continue-btn{
-display:inline-block;
 opacity:0;
-animation:buttonShow 1s ease forwards;
-animation-delay:9.2s;
+animation:buttonReveal 1s ease forwards;
+animation-delay:10s;
 }
 
 button{
 background:white;
 color:#1b6ca8;
 border:none;
-padding:15px 40px;
-border-radius:30px;
+padding:16px 45px;
+border-radius:35px;
 font-size:19px;
 cursor:pointer;
-margin-top:25px;
-transition:0.3s;
+margin-top:30px;
+font-weight:bold;
+transition:.35s;
+box-shadow:0 8px 25px rgba(0,0,0,.2);
 }
 
 button:hover{
-transform:scale(1.07);
-box-shadow:0 8px 25px rgba(255,255,255,0.25);
+transform:scale(1.08);
+box-shadow:0 12px 35px rgba(255,255,255,.25);
 }
 
 
@@ -205,7 +262,12 @@ box-shadow:0 8px 25px rgba(255,255,255,0.25);
 
 0%{
 opacity:0;
-transform:scale(0.8);
+transform:scale(.75);
+}
+
+70%{
+opacity:1;
+transform:scale(1.05);
 }
 
 100%{
@@ -245,7 +307,7 @@ opacity:1;
 
 from{
 opacity:0;
-transform:translateY(30px);
+transform:translateY(35px);
 }
 
 to{
@@ -255,16 +317,48 @@ transform:translateY(0);
 
 }
 
-@keyframes slideRight{
+@keyframes titleReveal{
 
 from{
 opacity:0;
-transform:translateX(40px);
+transform:translateY(25px);
+letter-spacing:0;
 }
 
 to{
 opacity:1;
-transform:translateX(0);
+transform:translateY(0);
+letter-spacing:1px;
+}
+
+}
+
+@keyframes cardReveal{
+
+from{
+opacity:0;
+transform:translateY(40px) scale(.9);
+}
+
+to{
+opacity:1;
+transform:translateY(0) scale(1);
+}
+
+}
+
+@keyframes glowReveal{
+
+from{
+opacity:0;
+transform:scale(.9);
+text-shadow:0 0 0 transparent;
+}
+
+to{
+opacity:1;
+transform:scale(1);
+text-shadow:0 0 25px rgba(255,255,255,.25);
 }
 
 }
@@ -281,16 +375,65 @@ opacity:1;
 
 }
 
-@keyframes buttonShow{
+@keyframes authorReveal{
 
 from{
 opacity:0;
-transform:scale(0.8);
+transform:scale(.7);
 }
 
 to{
 opacity:1;
 transform:scale(1);
+}
+
+}
+
+@keyframes buttonReveal{
+
+from{
+opacity:0;
+transform:translateY(20px) scale(.9);
+}
+
+to{
+opacity:1;
+transform:translateY(0) scale(1);
+}
+
+}
+
+
+/* الهاتف */
+
+@media(max-width:700px){
+
+.intro h1{
+font-size:40px;
+}
+
+.welcome-card{
+padding:30px 20px;
+}
+
+.main-title{
+font-size:36px;
+}
+
+.quote{
+font-size:21px;
+}
+
+.description{
+font-size:18px;
+}
+
+.features{
+grid-template-columns:1fr;
+}
+
+.feature{
+font-size:18px;
 }
 
 }
@@ -303,16 +446,16 @@ transform:scale(1);
 <body>
 
 
-<!-- شاشة الترحيب الأولى -->
+<!-- شاشة الترحيب -->
 
 <div class="intro">
 
-<h1>🏥 مرحباً بكم</h1>
+<h1>مرحباً بكم</h1>
 
 </div>
 
 
-<!-- الصفحة الرئيسية للترحيب -->
+<!-- المحتوى -->
 
 <div class="welcome-container">
 
@@ -346,19 +489,42 @@ M² Edition
 
 
 <h2 class="features-title">
+
 تسعى المنصة إلى تطوير تجربة العلاج الطبيعي عبر:
+
 </h2>
 
 
 <div class="features">
 
-<p>🦴 تحليل الحركة بطريقة ذكية ودقيقة.</p>
 
-<p>📋 متابعة تطور المريض خلال مراحل التأهيل.</p>
+<div class="feature">
 
-<p>🏃 إنشاء برامج تأهيلية مخصصة وفق احتياجات كل حالة.</p>
+تحليل الحركة بطريقة ذكية ودقيقة
 
-<p>🧠 دعم الأخصائي بالمعلومات والبيانات للمساعدة في اتخاذ القرار العلاجي.</p>
+</div>
+
+
+<div class="feature">
+
+متابعة تطور المريض خلال مراحل التأهيل
+
+</div>
+
+
+<div class="feature">
+
+إنشاء برامج تأهيلية مخصصة وفق احتياجات كل حالة
+
+</div>
+
+
+<div class="feature">
+
+دعم الأخصائي بالمعلومات والبيانات للمساعدة في اتخاذ القرار العلاجي
+
+</div>
+
 
 </div>
 
