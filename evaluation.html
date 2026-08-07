@@ -191,12 +191,9 @@ patientData.name || "";
 
 function saveEvaluation(){
 
-
 let evaluationData = {
 
 patientName: document.querySelector('input[placeholder="اسم المريض"]').value,
-
-ageGroup: document.querySelectorAll("select")[0].value,
 
 category: document.querySelectorAll("select")[1].value,
 
@@ -215,19 +212,15 @@ notes: document.querySelector("textarea").value
 };
 
 
-
 localStorage.setItem(
 "evaluationData",
 JSON.stringify(evaluationData)
 );
 
 
-
-window.location.href="rehab.html";
-
+window.location.href="movement.html";
 
 }
-
 
 
 function goBack(){
