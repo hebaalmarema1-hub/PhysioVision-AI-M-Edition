@@ -177,6 +177,18 @@ PhysioVision AI – M² Edition
 </div>
 <script>
 
+let patientData = JSON.parse(localStorage.getItem("patientData"));
+
+if(patientData){
+
+document.querySelector('input[placeholder="اسم المريض"]').value =
+patientData.name || "";
+
+}
+
+
+// حفظ التقييم
+
 function saveEvaluation(){
 
 
