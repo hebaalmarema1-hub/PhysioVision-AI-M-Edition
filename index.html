@@ -5,18 +5,15 @@
 
 <meta charset="UTF-8">
 
-<link rel="manifest" href="manifest.json">
+<title>PhysioVision AI – M² Edition</title>
+
+<link rel="manifest" href="./manifest.json">
 
 <meta name="theme-color" content="#1b6ca8">
 
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="PhysioVision AI">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-<link rel="apple-touch-icon" href="IMG_0282.PNG">
-
-<title>PhysioVision AI – M² Edition</title>
-    
 <style>
 
 body {
@@ -63,6 +60,14 @@ button {
     padding: 15px 35px;
     border-radius: 30px;
     font-size: 18px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.install {
+    display: none;
+    background: #00c853;
+    color: white;
 }
 
 </style>
@@ -86,31 +91,121 @@ button {
 </p>
 
 <a href="welcome.html">
+
 <button>
 ابدأ المنصة
 </button>
+
 </a>
-    
+
+<br>
+
+<button id="installBtn" class="install">
+📱 تثبيت PhysioVision AI
+</button>
 
 </div>
 
 </div>
+
 
 <script>
+
+/* تشغيل التطبيق */
+
 if ("serviceWorker" in navigator) {
+
     window.addEventListener("load", function() {
+
         navigator.serviceWorker.register("./service-worker.js")
-            .then(function() {
-                console.log("PhysioVision AI جاهز كتطبيق");
-            })
-            .catch(function(error) {
-                console.log("خطأ في تشغيل التطبيق:", error);
-            });
+
+        .then(function() {
+
+            console.log("PhysioVision AI جاهز كتطبيق");
+
+        })
+
+        .catch(function(error) {
+
+            console.log(
+                "خطأ في تشغيل التطبيق:",
+                error
+            );
+
+        });
+
     });
+
 }
+
+
+/* زر تثبيت التطبيق */
+
+let deferredPrompt = null;
+
+const installBtn =
+document.getElementById("installBtn");
+
+
+window.addEventListener(
+"beforeinstallprompt",
+function(event) {
+
+    event.preventDefault();
+
+    deferredPrompt = event;
+
+    installBtn.style.display = "inline-block";
+
+});
+
+
+installBtn.addEventListener(
+"click",
+async function() {
+
+    if (!deferredPrompt) {
+
+        alert(
+            "التثبيت غير متاح حاليًا. افتحي المنصة من Chrome ثم حاولي مرة أخرى."
+        );
+
+        return;
+
+    }
+
+    deferredPrompt.prompt();
+
+    const result =
+    await deferredPrompt.userChoice;
+
+    console.log(
+        "اختيار المستخدم:",
+        result.outcome
+    );
+
+    deferredPrompt = null;
+
+    installBtn.style.display = "none";
+
+});
+
+
+window.addEventListener(
+"appinstalled",
+function() {
+
+    console.log(
+        "تم تثبيت PhysioVision AI بنجاح"
+    );
+
+    installBtn.style.display = "none";
+
+});
+
 </script>
 
+
 </body>
+
 </html>
-
-
