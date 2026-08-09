@@ -737,34 +737,19 @@ alert("تعذر تشغيل الكاميرا");
 
 
 
-function stopCamera(){
-
-
-if(stream){
-
-stream.getTracks().forEach(track=>track.stop());
-
-video.srcObject=null;
-
-}
-
-
-clearInterval(timer);
-
-
-document.getElementById("notes").innerHTML =
-"بانتظار تشغيل التحليل";
-
-
-}
-
-
-
 function saveResults(){
 
 alert("تم الضغط على حفظ النتائج");
 
+let patientData =
+JSON.parse(localStorage.getItem("patientData")) || {};
+
+let evaluationData =
+JSON.parse(localStorage.getItem("evaluationData")) || {};
+
 let resultData = {
+
+...patientData,
 
 ...evaluationData,
 
@@ -778,13 +763,16 @@ notes: document.getElementById("notes").innerText
 
 };
 
-localStorage.setItem("resultData", JSON.stringify(resultData));
+
+localStorage.setItem(
+"resultData",
+JSON.stringify(resultData)
+);
+
 
 window.location.href="rehab.html";
 
 }
-</script>
-
 
 </body>
 
