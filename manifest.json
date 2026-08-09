@@ -1,0 +1,17 @@
+{
+  "name": "PhysioVision AI – M² Edition",
+  "short_name": "PhysioVision AI",
+  "description": "Smart Movement Analysis & Rehabilitation Platform",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0b1f3a",
+  "theme_color": "#1b6ca8",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "IMG_0282.PNG",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
