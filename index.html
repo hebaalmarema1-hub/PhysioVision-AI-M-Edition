@@ -92,5 +92,21 @@ button {
 
 </div>
 
+<script>
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function() {
+        navigator.serviceWorker.register("./service-worker.js")
+            .then(function() {
+                console.log("PhysioVision AI جاهز كتطبيق");
+            })
+            .catch(function(error) {
+                console.log("خطأ في تشغيل التطبيق:", error);
+            });
+    });
+}
+</script>
+
 </body>
-</html>    
+</html>
+
+
