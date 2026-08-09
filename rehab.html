@@ -513,7 +513,105 @@ document.getElementById("plan").innerHTML =
 
 }
 function goReports(){
+// قراءة بيانات المريض
+let patientData =
+JSON.parse(localStorage.getItem("patientData")) || {};
 
+// قراءة التقييم الشامل
+let evaluationData =
+JSON.parse(localStorage.getItem("evaluationData")) || {};
+
+// قراءة نتائج تحليل الحركة
+let resultData =
+JSON.parse(localStorage.getItem("resultData")) || {};
+
+
+// دمج البيانات كلها
+let data = {
+    ...patientData,
+    ...evaluationData,
+    ...resultData
+};
+
+
+// عرض البيانات
+document.getElementById("category").innerHTML =
+data.category || "--";
+
+document.getElementById("diagnosis").innerHTML =
+data.diagnosis || "--";
+
+document.getElementById("pain").innerHTML =
+data.pain || "--";
+
+
+// اختيار البرنامج حسب التشخيص ثم المفصل ثم التخصص
+let program =
+rehabPrograms[data.diagnosis] ||
+rehabPrograms[data.joint] ||
+rehabPrograms[data.category];
+
+
+if(program){
+
+document.getElementById("plan").innerHTML = `
+
+<h3>🎯 الأهداف</h3>
+
+${program.goals.join("<br>")}
+
+
+<h3>🏃 التمارين</h3>
+
+${program.exercises.join("<br>")}
+
+
+<h3>📅 المدة</h3>
+
+${program.duration}
+
+
+<hr>
+
+<h3>📊 نتائج التحليل الحركي</h3>
+
+<p>
+مدى الحركة ROM:
+<strong>${data.rom || "--"}°</strong>
+</p>
+
+<p>
+عدد التكرارات:
+<strong>${data.reps || "--"}</strong>
+</p>
+
+<p>
+جودة الأداء:
+<strong>${data.quality || "--"}</strong>
+</p>
+
+<p>
+ملاحظات التحليل:
+<strong>${data.notes || "--"}</strong>
+</p>
+
+`;
+
+}
+
+else{
+
+document.getElementById("plan").innerHTML =
+"لا يوجد برنامج لهذه الحالة";
+
+}
+
+
+function goReports(){
+
+window.location.href="reports.html";
+
+}
 window.location.href="reports.html";
 
 }
