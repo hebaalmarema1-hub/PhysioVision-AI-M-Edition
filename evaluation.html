@@ -195,6 +195,8 @@ let evaluationData = {
 
 patientName: document.querySelector('input[placeholder="اسم المريض"]').value,
 
+ageGroup: document.querySelectorAll("select")[0].value,
+
 category: document.querySelectorAll("select")[1].value,
 
 diagnosis: document.querySelectorAll("select")[2].value,
@@ -221,8 +223,6 @@ JSON.stringify(evaluationData)
 window.location.href="movement.html";
 
 }
-
-
 function goBack(){
 
 window.location.href="dashboard.html";
