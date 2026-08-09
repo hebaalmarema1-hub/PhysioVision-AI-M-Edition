@@ -130,7 +130,17 @@ gender: document.querySelector("select").value,
 
 fileNumber: document.querySelector('input[placeholder="رقم الملف"]').value,
 
-phone: document.querySelector('input[placeholder="رقم الهاتف"]').value
+phone: document.querySelector('input[placeholder="رقم الهاتف"]').value,
+
+medicalHistory: document.querySelector('textarea[placeholder="التاريخ المرضي"]').value,
+
+chronicDiseases: document.querySelector('textarea[placeholder="الأمراض المزمنة"]').value,
+
+previousOperations: document.querySelector('textarea[placeholder="العمليات السابقة"]').value,
+
+medications: document.querySelector('textarea[placeholder="الأدوية"]').value,
+
+allergies: document.querySelector('textarea[placeholder="الحساسية"]').value
 
 };
 
@@ -148,6 +158,7 @@ window.location.href="evaluation.html";
 
 };
 
+
 document.getElementById("backBtn").onclick = function(){
 
 window.history.back();
@@ -155,7 +166,6 @@ window.history.back();
 };
 
 </script>
-
 
 </body>
 
