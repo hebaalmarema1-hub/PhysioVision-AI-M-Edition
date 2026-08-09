@@ -48,6 +48,19 @@ background:#00c853;
 color:white;
 font-size:18px;
 cursor:pointer;
+margin:10px;
+}
+
+.info{
+background:rgba(255,255,255,0.08);
+padding:15px;
+border-radius:12px;
+margin:10px 0;
+}
+
+.plan{
+line-height:2.2;
+font-size:18px;
 }
 
 </style>
@@ -61,28 +74,74 @@ cursor:pointer;
 <h1>📊 تقرير الحالة - PhysioVision AI</h1>
 
 
+<!-- بيانات المريض -->
+
 <div class="card">
 
-<h2>👤 بيانات الحالة</h2>
+<h2>👤 ملف المريض</h2>
 
-<p>نوع الحالة: <span id="category">--</span></p>
+<p>الاسم الكامل: <span id="name">--</span></p>
 
-<p>التشخيص: <span id="diagnosis">--</span></p>
+<p>العمر: <span id="age">--</span></p>
 
-<p>المفصل: <span id="joint">--</span></p>
+<p>الجنس: <span id="gender">--</span></p>
 
-<p>درجة الألم: <span id="pain">--</span></p>
+<p>رقم الملف: <span id="fileNumber">--</span></p>
 
+<p>رقم الهاتف: <span id="phone">--</span></p>
 
 </div>
 
 
+<!-- التاريخ الطبي -->
+
+<div class="card">
+
+<h2>🏥 التاريخ الطبي</h2>
+
+<p>التاريخ المرضي: <span id="medicalHistory">--</span></p>
+
+<p>الأمراض المزمنة: <span id="chronicDiseases">--</span></p>
+
+<p>العمليات السابقة: <span id="previousOperations">--</span></p>
+
+<p>الأدوية: <span id="medications">--</span></p>
+
+<p>الحساسية: <span id="allergies">--</span></p>
+
+</div>
+
+
+<!-- التقييم الشامل -->
+
+<div class="card">
+
+<h2>📋 التقييم الشامل</h2>
+
+<p>الفئة العمرية: <span id="ageGroup">--</span></p>
+
+<p>التخصص: <span id="category">--</span></p>
+
+<p>التشخيص: <span id="diagnosis">--</span></p>
+
+<p>درجة الألم: <span id="pain">--</span></p>
+
+<p>المفصل: <span id="joint">--</span></p>
+
+<p>قوة العضلة MMT: <span id="strength">--</span></p>
+
+<p>التوازن: <span id="balance">--</span></p>
+
+<p>ملاحظات الأخصائي: <span id="evaluationNotes">--</span></p>
+
+</div>
+
+
+<!-- تحليل الحركة -->
 
 <div class="card">
 
 <h2>🤖 تحليل الحركة</h2>
-
-<p>قوة العضلة: <span id="strength">--</span></p>
 
 <p>مدى الحركة ROM: <span id="rom">--</span></p>
 
@@ -92,23 +151,25 @@ cursor:pointer;
 
 <p>ملاحظات الذكاء الاصطناعي: <span id="notes">--</span></p>
 
-
 </div>
 
 
+<!-- البرنامج التأهيلي -->
 
 <div class="card">
 
-<h2>🏥 البرنامج التأهيلي</h2>
+<h2>🏃 البرنامج التأهيلي المقترح</h2>
 
-<div id="plan">
+<div id="plan" class="plan">
 
-لا توجد خطة
-
-</div>
+لا توجد خطة محفوظة
 
 </div>
 
+</div>
+
+
+<br>
 
 
 <button onclick="window.print()">
@@ -116,65 +177,122 @@ cursor:pointer;
 </button>
 
 
+<button onclick="window.location.href='dashboard.html'">
+🏠 العودة للوحة الرئيسية
+</button>
+
+
 
 <script>
 
 
-let saved = localStorage.getItem("resultData");
+let saved =
+localStorage.getItem("resultData");
 
 
 if(saved){
 
+let data =
+JSON.parse(saved);
 
-let data = JSON.parse(saved);
+
+// =====================
+// بيانات المريض
+// =====================
+
+document.getElementById("name").innerHTML =
+data.name || "--";
+
+document.getElementById("age").innerHTML =
+data.age || "--";
+
+document.getElementById("gender").innerHTML =
+data.gender || "--";
+
+document.getElementById("fileNumber").innerHTML =
+data.fileNumber || "--";
+
+document.getElementById("phone").innerHTML =
+data.phone || "--";
 
 
+// =====================
+// التاريخ الطبي
+// =====================
+
+document.getElementById("medicalHistory").innerHTML =
+data.medicalHistory || "--";
+
+document.getElementById("chronicDiseases").innerHTML =
+data.chronicDiseases || "--";
+
+document.getElementById("previousOperations").innerHTML =
+data.previousOperations || "--";
+
+document.getElementById("medications").innerHTML =
+data.medications || "--";
+
+document.getElementById("allergies").innerHTML =
+data.allergies || "--";
+
+
+// =====================
+// التقييم الشامل
+// =====================
+
+document.getElementById("ageGroup").innerHTML =
+data.ageGroup || "--";
 
 document.getElementById("category").innerHTML =
 data.category || "--";
 
-
 document.getElementById("diagnosis").innerHTML =
 data.diagnosis || "--";
-
-
-document.getElementById("joint").innerHTML =
-data.joint || "--";
-
 
 document.getElementById("pain").innerHTML =
 data.pain || "--";
 
+document.getElementById("joint").innerHTML =
+data.joint || "--";
 
 document.getElementById("strength").innerHTML =
 data.muscleStrength || "--";
 
+document.getElementById("balance").innerHTML =
+data.balance || "--";
+
+document.getElementById("evaluationNotes").innerHTML =
+data.notes || "--";
+
+
+// =====================
+// تحليل الحركة
+// =====================
 
 document.getElementById("rom").innerHTML =
 data.rom || "--";
 
-
 document.getElementById("reps").innerHTML =
 data.reps || "--";
 
-
 document.getElementById("quality").innerHTML =
 data.quality || "--";
-
 
 document.getElementById("notes").innerHTML =
 data.notes || "--";
 
 
+// =====================
+// البرنامج التأهيلي
+// =====================
 
 document.getElementById("plan").innerHTML =
-data.plan || "يتم إنشاؤها من البرنامج التأهيلي";
-
+data.plan || "لا توجد خطة محفوظة";
 
 }
 
-else{
 
+else{
 
 document.body.innerHTML +=
 
