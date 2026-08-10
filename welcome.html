@@ -5,401 +5,550 @@
 
 <meta charset="UTF-8">
 
-<title>PhysioVision AI - M² Edition</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>مرحباً بكم - PhysioVision AI</title>
 
 <style>
 
 *{
-box-sizing:border-box;
+    box-sizing:border-box;
+}
+
+html,
+body{
+    margin:0;
+    padding:0;
+    min-height:100%;
 }
 
 body{
-margin:0;
-font-family:"Arial",sans-serif;
-background:
-radial-gradient(circle at top,#1b6ca8 0%,#0b1f3a 45%,#06152b 100%);
-color:white;
-text-align:center;
-min-height:100vh;
-overflow-x:hidden;
+
+    font-family:
+    "Segoe UI",
+    "Noto Sans Arabic",
+    Tahoma,
+    Arial,
+    sans-serif;
+
+    background:
+    radial-gradient(
+        circle at top,
+        #1b6ca8 0%,
+        #0b1f3a 45%,
+        #06152b 100%
+    );
+
+    color:white;
+
+    text-align:center;
+
+    min-height:100vh;
+
+    overflow-x:hidden;
 }
 
-/* شاشة البداية */
 
-.intro{
-position:fixed;
-inset:0;
-display:flex;
-align-items:center;
-justify-content:center;
-background:#06152b;
-z-index:20;
-animation:introFade 1.5s ease forwards;
-animation-delay:3.5s;
+/* الخلفية */
+
+.background{
+
+    position:fixed;
+
+    inset:0;
+
+    background:
+
+    radial-gradient(
+        circle at 20% 20%,
+        rgba(0,220,255,.16),
+        transparent 32%
+    ),
+
+    radial-gradient(
+        circle at 80% 80%,
+        rgba(0,130,255,.18),
+        transparent 35%
+    );
+
+    pointer-events:none;
 }
 
-.intro h1{
-font-size:58px;
-letter-spacing:1px;
-opacity:0;
-animation:welcomeShow 2s ease forwards;
-text-shadow:0 0 30px rgba(255,255,255,.35);
-}
 
 /* المحتوى */
 
 .welcome-container{
-max-width:950px;
-margin:auto;
-padding:70px 25px;
-opacity:0;
-animation:contentShow 1.5s ease forwards;
-animation-delay:3.8s;
+
+    position:relative;
+
+    z-index:2;
+
+    width:min(950px,92vw);
+
+    margin:auto;
+
+    padding:60px 0;
 }
+
+
+/* البطاقة */
 
 .welcome-card{
-background:rgba(255,255,255,.09);
-backdrop-filter:blur(15px);
-padding:50px;
-border:1px solid rgba(255,255,255,.18);
-border-radius:32px;
-box-shadow:
-0 20px 70px rgba(0,0,0,.35),
-inset 0 1px rgba(255,255,255,.15);
+
+    background:
+    rgba(255,255,255,.09);
+
+    backdrop-filter:
+    blur(15px);
+
+    padding:
+    50px;
+
+    border:
+    1px solid rgba(255,255,255,.18);
+
+    border-radius:
+    32px;
+
+    box-shadow:
+
+    0 20px 70px rgba(0,0,0,.35),
+
+    inset 0 1px rgba(255,255,255,.15);
+
 }
+
+
+/* اسم المنصة */
 
 .main-title{
-font-size:48px;
-margin:0 0 10px;
-opacity:0;
-animation:slideUp 1s ease forwards;
-animation-delay:4.2s;
+
+    font-size:
+    clamp(35px,5vw,48px);
+
+    margin:
+    0 0 10px;
+
+    animation:
+    slideUp .8s ease both;
 }
+
+
+/* النسخة */
 
 .edition{
-font-size:25px;
-letter-spacing:3px;
-margin-bottom:35px;
-opacity:0;
-animation:slideUp 1s ease forwards;
-animation-delay:4.6s;
+
+    font-size:
+    clamp(21px,3vw,25px);
+
+    letter-spacing:3px;
+
+    margin-bottom:35px;
+
+    color:
+    rgba(220,248,255,.95);
+
+    animation:
+    slideUp .8s ease .15s both;
 }
+
+
+/* العبارة */
 
 .quote{
-font-size:27px;
-font-weight:bold;
-line-height:1.9;
-margin:30px 0;
-opacity:0;
-animation:slideUp 1s ease forwards;
-animation-delay:5s;
+
+    font-size:
+    clamp(21px,3vw,27px);
+
+    font-weight:bold;
+
+    line-height:1.9;
+
+    margin:
+    30px 0;
+
+    animation:
+    slideUp .8s ease .3s both;
 }
 
+
+/* الوصف */
+
 .description{
-font-size:20px;
-line-height:2.1;
-opacity:0;
-animation:slideUp 1s ease forwards;
-animation-delay:5.4s;
+
+    font-size:
+    clamp(17px,2.3vw,20px);
+
+    line-height:2.1;
+
+    color:
+    rgba(255,255,255,.92);
+
+    animation:
+    slideUp .8s ease .45s both;
 }
+
 
 /* عنوان المميزات */
 
 .features-title{
-font-size:25px;
-margin-top:45px;
-opacity:0;
-animation:titleReveal 1.2s ease forwards;
-animation-delay:5.8s;
+
+    font-size:
+    clamp(20px,3vw,25px);
+
+    margin-top:45px;
+
+    animation:
+    slideUp .8s ease .6s both;
 }
 
-/* بطاقات المميزات */
+
+/* المميزات */
 
 .features{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:18px;
-margin-top:30px;
+
+    display:grid;
+
+    grid-template-columns:
+    1fr 1fr;
+
+    gap:18px;
+
+    margin-top:30px;
 }
+
 
 .feature{
-background:rgba(255,255,255,.08);
-border:1px solid rgba(255,255,255,.14);
-border-radius:22px;
-padding:25px 20px;
-font-size:19px;
-line-height:1.8;
-min-height:120px;
 
-opacity:0;
-transform:translateY(40px) scale(.95);
-transition:.4s;
+    background:
+    rgba(255,255,255,.08);
+
+    border:
+    1px solid rgba(255,255,255,.14);
+
+    border-radius:
+    22px;
+
+    padding:
+    25px 20px;
+
+    font-size:19px;
+
+    line-height:1.8;
+
+    min-height:120px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    transition:
+    .35s;
+
+    animation:
+    cardReveal .8s ease both;
 }
 
-.feature:hover{
-transform:translateY(-6px) scale(1.02);
-background:rgba(255,255,255,.14);
-box-shadow:0 12px 35px rgba(0,0,0,.25);
-}
 
 .feature:nth-child(1){
-animation:cardReveal 1s ease forwards;
-animation-delay:6.2s;
+    animation-delay:.8s;
 }
 
 .feature:nth-child(2){
-animation:cardReveal 1s ease forwards;
-animation-delay:6.6s;
+    animation-delay:1s;
 }
 
 .feature:nth-child(3){
-animation:cardReveal 1s ease forwards;
-animation-delay:7s;
+    animation-delay:1.2s;
 }
 
 .feature:nth-child(4){
-animation:cardReveal 1s ease forwards;
-animation-delay:7.4s;
+    animation-delay:1.4s;
 }
+
+
+.feature:hover{
+
+    transform:
+    translateY(-6px)
+    scale(1.02);
+
+    background:
+    rgba(255,255,255,.14);
+
+    box-shadow:
+    0 12px 35px rgba(0,0,0,.25);
+}
+
 
 /* الجملة الأخيرة */
 
 .final-quote{
-font-size:25px;
-font-weight:bold;
-line-height:1.9;
-margin:50px 0 35px;
-opacity:0;
-animation:glowReveal 1.5s ease forwards;
-animation-delay:7.9s;
+
+    font-size:
+    clamp(20px,3vw,25px);
+
+    font-weight:bold;
+
+    line-height:1.9;
+
+    margin:
+    50px 0 35px;
+
+    text-shadow:
+    0 0 25px rgba(255,255,255,.20);
+
+    animation:
+    fadeIn 1s ease 1.7s both;
 }
+
 
 /* الخط */
 
 hr{
-border:0;
-height:1px;
-background:linear-gradient(
-to left,
-transparent,
-rgba(255,255,255,.5),
-transparent
-);
-margin:40px 0;
-opacity:0;
-animation:fadeIn 1s ease forwards;
-animation-delay:8.4s;
+
+    border:0;
+
+    height:1px;
+
+    background:
+    linear-gradient(
+        to left,
+        transparent,
+        rgba(255,255,255,.5),
+        transparent
+    );
+
+    margin:
+    40px 0;
 }
+
 
 /* اسم المنصة */
 
 .platform-name{
-font-size:23px;
-font-weight:bold;
-opacity:0;
-animation:fadeIn 1s ease forwards;
-animation-delay:8.7s;
+
+    font-size:23px;
+
+    font-weight:bold;
+
+    animation:
+    fadeIn 1s ease 1.9s both;
 }
+
 
 .platform-subtitle{
-font-size:17px;
-font-style:italic;
-margin-top:8px;
-opacity:0;
-animation:fadeIn 1s ease forwards;
-animation-delay:9s;
+
+    font-size:17px;
+
+    font-style:italic;
+
+    margin-top:8px;
+
+    color:
+    rgba(255,255,255,.75);
+
+    animation:
+    fadeIn 1s ease 2.1s both;
 }
 
-/* إعداد وتصميم */
+
+/* الإعداد */
 
 .author{
-display:inline-block;
-margin-top:30px;
-padding:14px 30px;
-border-radius:30px;
-border:1px solid rgba(255,255,255,.3);
-background:rgba(255,255,255,.08);
-font-size:19px;
-font-weight:bold;
 
-opacity:0;
-transform:scale(.8);
-animation:authorReveal 1.4s ease forwards;
-animation-delay:9.4s;
+    display:inline-block;
+
+    margin-top:30px;
+
+    padding:
+    14px 30px;
+
+    border-radius:30px;
+
+    border:
+    1px solid rgba(255,255,255,.3);
+
+    background:
+    rgba(255,255,255,.08);
+
+    font-size:19px;
+
+    font-weight:bold;
+
+    animation:
+    authorReveal 1s ease 2.3s both;
 }
 
-/* زر المتابعة */
+
+/* زر ابدأ المنصة */
 
 .continue-btn{
-opacity:0;
-animation:buttonReveal 1s ease forwards;
-animation-delay:10s;
-}
 
-button{
-background:white;
-color:#1b6ca8;
-border:none;
-padding:16px 45px;
-border-radius:35px;
-font-size:19px;
-cursor:pointer;
-margin-top:30px;
-font-weight:bold;
-transition:.35s;
-box-shadow:0 8px 25px rgba(0,0,0,.2);
-}
+    margin-top:30px;
 
-button:hover{
-transform:scale(1.08);
-box-shadow:0 12px 35px rgba(255,255,255,.25);
+    animation:
+    buttonReveal 1s ease 2.5s both;
 }
 
 
-/* التأثيرات */
+.start-button{
 
-@keyframes welcomeShow{
+    display:inline-block;
 
-0%{
-opacity:0;
-transform:scale(.75);
+    background:
+    linear-gradient(
+        135deg,
+        #ffffff,
+        #dff8ff
+    );
+
+    color:
+    #1b6ca8;
+
+    border:none;
+
+    padding:
+    16px 45px;
+
+    border-radius:
+    35px;
+
+    font-size:19px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    text-decoration:none;
+
+    box-shadow:
+    0 8px 25px rgba(0,0,0,.2);
+
+    transition:
+    .35s;
 }
 
-70%{
-opacity:1;
-transform:scale(1.05);
+
+.start-button:hover{
+
+    transform:
+    scale(1.08);
+
+    box-shadow:
+    0 12px 35px rgba(255,255,255,.25);
 }
 
-100%{
-opacity:1;
-transform:scale(1);
-}
 
-}
-
-@keyframes introFade{
-
-0%{
-opacity:1;
-visibility:visible;
-}
-
-100%{
-opacity:0;
-visibility:hidden;
-}
-
-}
-
-@keyframes contentShow{
-
-from{
-opacity:0;
-}
-
-to{
-opacity:1;
-}
-
-}
+/* الحركات */
 
 @keyframes slideUp{
 
-from{
-opacity:0;
-transform:translateY(35px);
-}
+    from{
 
-to{
-opacity:1;
-transform:translateY(0);
-}
+        opacity:0;
 
-}
+        transform:
+        translateY(30px);
 
-@keyframes titleReveal{
+    }
 
-from{
-opacity:0;
-transform:translateY(25px);
-letter-spacing:0;
-}
+    to{
 
-to{
-opacity:1;
-transform:translateY(0);
-letter-spacing:1px;
-}
+        opacity:1;
+
+        transform:
+        translateY(0);
+
+    }
 
 }
+
 
 @keyframes cardReveal{
 
-from{
-opacity:0;
-transform:translateY(40px) scale(.9);
-}
+    from{
 
-to{
-opacity:1;
-transform:translateY(0) scale(1);
-}
+        opacity:0;
 
-}
+        transform:
+        translateY(35px)
+        scale(.94);
 
-@keyframes glowReveal{
+    }
 
-from{
-opacity:0;
-transform:scale(.9);
-text-shadow:0 0 0 transparent;
-}
+    to{
 
-to{
-opacity:1;
-transform:scale(1);
-text-shadow:0 0 25px rgba(255,255,255,.25);
-}
+        opacity:1;
+
+        transform:
+        translateY(0)
+        scale(1);
+
+    }
 
 }
+
 
 @keyframes fadeIn{
 
-from{
-opacity:0;
+    from{
+        opacity:0;
+    }
+
+    to{
+        opacity:1;
+    }
+
 }
 
-to{
-opacity:1;
-}
-
-}
 
 @keyframes authorReveal{
 
-from{
-opacity:0;
-transform:scale(.7);
+    from{
+
+        opacity:0;
+
+        transform:
+        scale(.8);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+        scale(1);
+
+    }
+
 }
 
-to{
-opacity:1;
-transform:scale(1);
-}
-
-}
 
 @keyframes buttonReveal{
 
-from{
-opacity:0;
-transform:translateY(20px) scale(.9);
-}
+    from{
 
-to{
-opacity:1;
-transform:translateY(0) scale(1);
-}
+        opacity:0;
+
+        transform:
+        translateY(20px)
+        scale(.9);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+        translateY(0)
+        scale(1);
+
+    }
 
 }
 
@@ -408,33 +557,43 @@ transform:translateY(0) scale(1);
 
 @media(max-width:700px){
 
-.intro h1{
-font-size:40px;
-}
+    .welcome-container{
 
-.welcome-card{
-padding:30px 20px;
-}
+        padding:
+        30px 0;
 
-.main-title{
-font-size:36px;
-}
+    }
 
-.quote{
-font-size:21px;
-}
+    .welcome-card{
 
-.description{
-font-size:18px;
-}
+        padding:
+        30px 20px;
 
-.features{
-grid-template-columns:1fr;
-}
+    }
 
-.feature{
-font-size:18px;
-}
+    .features{
+
+        grid-template-columns:
+        1fr;
+
+    }
+
+    .feature{
+
+        font-size:18px;
+
+    }
+
+    .start-button{
+
+        width:90%;
+
+        font-size:17px;
+
+        padding:
+        14px 25px;
+
+    }
 
 }
 
@@ -446,29 +605,26 @@ font-size:18px;
 <body>
 
 
-<!-- شاشة الترحيب -->
+<div class="background"></div>
 
-<div class="intro">
-
-<h1>مرحباً بكم</h1>
-
-</div>
-
-
-<!-- المحتوى -->
 
 <div class="welcome-container">
+
 
 <div class="welcome-card">
 
 
 <h1 class="main-title">
+
 PhysioVision AI
+
 </h1>
 
 
 <div class="edition">
+
 M² Edition
+
 </div>
 
 
@@ -563,11 +719,14 @@ Smart Movement Analysis & Rehabilitation Platform
 <div class="continue-btn">
 
 
-<a href="login.html">
-    <button>
-        ابدأ المنصة
-    </button>
+<a
+href="login.html"
+class="start-button">
+
+تسجيل دخول الأخصائي
+
 </a>
+
 
 </div>
 
