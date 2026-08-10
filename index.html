@@ -9,6 +9,10 @@
 
 <title>PhysioVision AI – M² Edition</title>
 
+<link rel="manifest" href="./manifest.json">
+
+<meta name="theme-color" content="#1b6ca8">
+
 <style>
 
 *{
@@ -20,8 +24,7 @@ body{
     margin:0;
     padding:0;
     width:100%;
-    height:100%;
-    overflow:hidden;
+    min-height:100%;
 }
 
 body{
@@ -33,202 +36,24 @@ body{
     sans-serif;
 
     background:
-    radial-gradient(
-        circle at 50% 40%,
-        #1b6ca8 0%,
-        #102d52 42%,
-        #061426 100%
+    linear-gradient(
+        135deg,
+        #0b1f3a,
+        #1b6ca8
     );
 
     color:white;
 
-}
-
-
-/* الخلفية */
-
-.background{
-
-    position:absolute;
-
-    inset:0;
-
-    background:
-
-    radial-gradient(
-        circle at 20% 25%,
-        rgba(0,220,255,.18),
-        transparent 32%
-    ),
-
-    radial-gradient(
-        circle at 80% 75%,
-        rgba(0,130,255,.20),
-        transparent 35%
-    );
-
-    animation:
-    backgroundPulse 8s ease-in-out infinite;
-
-}
-
-@keyframes backgroundPulse{
-
-    0%,100%{
-        opacity:.8;
-    }
-
-    50%{
-        opacity:1;
-    }
+    text-align:center;
 
 }
 
 
-/* شبكة الذكاء الاصطناعي */
+/* الصفحة */
 
-.network{
+.container{
 
-    position:absolute;
-
-    inset:-100px;
-
-    opacity:.16;
-
-    background-image:
-
-    linear-gradient(
-        90deg,
-        transparent 49%,
-        rgba(130,230,255,.20) 50%,
-        transparent 51%
-    ),
-
-    linear-gradient(
-        0deg,
-        transparent 49%,
-        rgba(130,230,255,.14) 50%,
-        transparent 51%
-    );
-
-    background-size:90px 90px;
-
-    animation:
-    moveGrid 20s linear infinite;
-
-}
-
-@keyframes moveGrid{
-
-    from{
-        transform:translate(0,0);
-    }
-
-    to{
-        transform:translate(90px,90px);
-    }
-
-}
-
-
-/* النقاط */
-
-.particle{
-
-    position:absolute;
-
-    width:4px;
-    height:4px;
-
-    border-radius:50%;
-
-    background:#9befff;
-
-    box-shadow:
-    0 0 10px #63e5ff,
-    0 0 25px #20bfff;
-
-    animation:
-    particleFloat 7s ease-in-out infinite;
-
-}
-
-.p1{
-    top:15%;
-    left:12%;
-}
-
-.p2{
-    top:30%;
-    left:86%;
-    animation-delay:1s;
-}
-
-.p3{
-    top:75%;
-    left:10%;
-    animation-delay:2s;
-}
-
-.p4{
-    top:82%;
-    left:88%;
-    animation-delay:3s;
-}
-
-.p5{
-    top:12%;
-    left:72%;
-    animation-delay:4s;
-}
-
-.p6{
-    top:55%;
-    left:5%;
-    animation-delay:2.5s;
-}
-
-.p7{
-    top:48%;
-    left:94%;
-    animation-delay:4.5s;
-}
-
-@keyframes particleFloat{
-
-    0%,100%{
-
-        transform:
-        translateY(0)
-        scale(1);
-
-        opacity:.25;
-
-    }
-
-    50%{
-
-        transform:
-        translateY(-25px)
-        scale(1.5);
-
-        opacity:1;
-
-    }
-
-}
-
-
-/* المحتوى */
-
-.content{
-
-    position:relative;
-
-    z-index:10;
-
-    width:100%;
-    height:100%;
+    min-height:100vh;
 
     display:flex;
 
@@ -238,9 +63,7 @@ body{
 
     justify-content:center;
 
-    text-align:center;
-
-    padding:25px;
+    padding:40px 20px;
 
 }
 
@@ -249,94 +72,30 @@ body{
 
 .logo{
 
-    width:
-    min(190px,48vw);
+    width:280px;
 
-    height:
-    min(190px,48vw);
+    max-width:80vw;
+
+    height:auto;
 
     object-fit:contain;
 
-    border-radius:25px;
+    border-radius:20px;
 
-    margin-bottom:20px;
-
-    filter:
-    drop-shadow(
-        0 15px 35px
-        rgba(0,0,0,.35)
-    );
-
-    animation:
-    logoEnter 1.5s ease both;
-
-}
-
-@keyframes logoEnter{
-
-    from{
-
-        opacity:0;
-
-        transform:
-        scale(.75)
-        translateY(-20px);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:
-        scale(1)
-        translateY(0);
-
-    }
+    margin-bottom:25px;
 
 }
 
 
 /* اسم المنصة */
 
-.title{
+h1{
 
     font-size:
-    clamp(32px,5vw,58px);
+    clamp(32px,5vw,50px);
 
-    font-weight:700;
-
-    margin:0;
-
-    line-height:1.3;
-
-    text-shadow:
-    0 5px 30px rgba(0,0,0,.45);
-
-    animation:
-    titleEnter 1.5s ease .3s both;
-
-}
-
-@keyframes titleEnter{
-
-    from{
-
-        opacity:0;
-
-        transform:
-        translateY(25px);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:
-        translateY(0);
-
-    }
+    margin:
+    0 0 10px;
 
 }
 
@@ -345,121 +104,43 @@ body{
 
 .edition{
 
-    margin-top:8px;
+    font-size:24px;
 
-    font-size:
-    clamp(20px,3vw,28px);
-
-    letter-spacing:3px;
-
-    color:
-    rgba(220,245,255,.95);
-
-    animation:
-    editionEnter 1.5s ease .5s both;
-
-}
-
-@keyframes editionEnter{
-
-    from{
-
-        opacity:0;
-
-        transform:
-        translateY(20px);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:
-        translateY(0);
-
-    }
+    margin-bottom:25px;
 
 }
 
 
 /* الوصف */
 
-.subtitle{
+.description{
 
-    margin-top:20px;
+    max-width:700px;
 
-    max-width:750px;
-
-    font-size:
-    clamp(17px,2.4vw,25px);
+    font-size:21px;
 
     line-height:1.9;
 
-    color:
-    rgba(255,255,255,.92);
-
-    animation:
-    subtitleEnter 1.5s ease .7s both;
-
-}
-
-@keyframes subtitleEnter{
-
-    from{
-
-        opacity:0;
-
-        transform:
-        translateY(20px);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:
-        translateY(0);
-
-    }
+    margin:0 auto 15px;
 
 }
 
 
-/* الجملة */
+/* الجملة الإنجليزية */
 
 .quote{
-
-    margin-top:10px;
 
     font-family:
     Georgia,
     "Times New Roman",
     serif;
 
-    font-size:
-    clamp(14px,1.7vw,20px);
-
-    letter-spacing:1px;
+    font-size:17px;
 
     color:
-    rgba(190,240,255,.85);
+    rgba(220,245,255,.9);
 
-    animation:
-    quoteEnter 1.5s ease .9s both;
-
-}
-
-@keyframes quoteEnter{
-
-    from{
-        opacity:0;
-    }
-
-    to{
-        opacity:1;
-    }
+    margin-bottom:30px;
 
 }
 
@@ -468,106 +149,56 @@ body{
 
 .start-button{
 
-    margin-top:30px;
+    display:inline-block;
 
-    padding:
-    15px 50px;
+    padding:15px 45px;
 
     border:none;
 
-    border-radius:50px;
+    border-radius:30px;
 
-    background:
-    linear-gradient(
-        135deg,
-        #ffffff,
-        #dff8ff
-    );
+    background:white;
 
-    color:#0b2a4a;
+    color:#1b6ca8;
 
     font-size:19px;
 
-    font-weight:700;
+    font-weight:bold;
 
     cursor:pointer;
 
-    box-shadow:
-
-    0 0 25px
-    rgba(130,230,255,.25),
-
-    0 12px 35px
-    rgba(0,0,0,.35);
-
-    transition:
-    .3s;
-
-    animation:
-    buttonEnter 1.5s ease 1.1s both;
-
-}
-
-.start-button:hover{
-
-    transform:
-    translateY(-4px)
-    scale(1.05);
+    text-decoration:none;
 
     box-shadow:
-
-    0 0 40px
-    rgba(100,225,255,.65),
-
-    0 15px 40px
-    rgba(0,0,0,.4);
-
-}
-
-@keyframes buttonEnter{
-
-    from{
-
-        opacity:0;
-
-        transform:
-        translateY(20px)
-        scale(.9);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:
-        translateY(0)
-        scale(1);
-
-    }
+    0 8px 25px
+    rgba(0,0,0,.25);
 
 }
 
 
-/* الانتقال */
+/* زر التثبيت */
 
-.fade-out{
+.install-button{
 
-    animation:
-    fadeOut .6s ease forwards;
+    display:none;
 
-}
+    margin-top:15px;
 
-@keyframes fadeOut{
+    padding:13px 30px;
 
-    to{
+    border:none;
 
-        opacity:0;
+    border-radius:30px;
 
-        transform:
-        scale(1.03);
+    background:#00c853;
 
-    }
+    color:white;
+
+    font-size:17px;
+
+    font-weight:bold;
+
+    cursor:pointer;
 
 }
 
@@ -578,34 +209,27 @@ body{
 
     .logo{
 
-        width:150px;
-        height:150px;
+        width:220px;
 
     }
 
-    .title{
+    .description{
 
-        font-size:30px;
-
-    }
-
-    .edition{
-
-        font-size:20px;
-
-    }
-
-    .subtitle{
-
-        font-size:17px;
+        font-size:18px;
 
         line-height:1.8;
 
     }
 
+    .edition{
+
+        font-size:21px;
+
+    }
+
     .quote{
 
-        font-size:14px;
+        font-size:15px;
 
     }
 
@@ -613,8 +237,7 @@ body{
 
         font-size:17px;
 
-        padding:
-        14px 42px;
+        padding:14px 38px;
 
     }
 
@@ -628,21 +251,7 @@ body{
 <body>
 
 
-<div class="background"></div>
-
-<div class="network"></div>
-
-
-<div class="particle p1"></div>
-<div class="particle p2"></div>
-<div class="particle p3"></div>
-<div class="particle p4"></div>
-<div class="particle p5"></div>
-<div class="particle p6"></div>
-<div class="particle p7"></div>
-
-
-<div class="content">
+<div class="container">
 
 
     <!-- شعار المنصة -->
@@ -655,12 +264,14 @@ body{
 
     <!-- اسم المنصة -->
 
-    <div class="title">
+    <h1>
 
         PhysioVision AI
 
-    </div>
+    </h1>
 
+
+    <!-- الإصدار -->
 
     <div class="edition">
 
@@ -669,14 +280,18 @@ body{
     </div>
 
 
-    <div class="subtitle">
+    <!-- وصف المنصة -->
+
+    <p class="description">
 
         منصة ذكية لتحليل الحركة ودعم
         التقييم والتأهيل الحركي
         باستخدام الذكاء الاصطناعي والرؤية الحاسوبية
 
-    </div>
+    </p>
 
+
+    <!-- الجملة الإنجليزية -->
 
     <div class="quote">
 
@@ -685,11 +300,24 @@ body{
     </div>
 
 
-    <button
-        class="start-button"
-        onclick="startPlatform()">
+    <!-- زر واحد فقط -->
+
+    <a
+        href="welcome.html"
+        class="start-button">
 
         ابدأ المنصة
+
+    </a>
+
+
+    <!-- زر تثبيت التطبيق -->
+
+    <button
+        id="installBtn"
+        class="install-button">
+
+        📱 تثبيت PhysioVision AI
 
     </button>
 
@@ -699,13 +327,77 @@ body{
 
 <script>
 
-function startPlatform(){
+/* ==========================
+   تثبيت التطبيق
+========================== */
 
-    window.location.href = "welcome.html";
+let deferredPrompt = null;
 
-}
+const installBtn =
+document.getElementById("installBtn");
+
+
+window.addEventListener(
+"beforeinstallprompt",
+function(event){
+
+    event.preventDefault();
+
+    deferredPrompt = event;
+
+    installBtn.style.display =
+    "inline-block";
+
+});
+
+
+installBtn.addEventListener(
+"click",
+async function(){
+
+    if(!deferredPrompt){
+
+        alert(
+            "التثبيت غير متاح حاليًا. افتحي المنصة من Chrome ثم حاولي مرة أخرى."
+        );
+
+        return;
+
+    }
+
+    deferredPrompt.prompt();
+
+    const result =
+    await deferredPrompt.userChoice;
+
+    console.log(
+        "اختيار المستخدم:",
+        result.outcome
+    );
+
+    deferredPrompt = null;
+
+    installBtn.style.display =
+    "none";
+
+});
+
+
+window.addEventListener(
+"appinstalled",
+function(){
+
+    console.log(
+        "تم تثبيت PhysioVision AI بنجاح"
+    );
+
+    installBtn.style.display =
+    "none";
+
+});
 
 </script>
+
 
 </body>
 
