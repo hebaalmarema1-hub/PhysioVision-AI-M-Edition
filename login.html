@@ -1,111 +1,219 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>تسجيل دخول الأخصائي - PhysioVision AI</title>
-
 <style>
-
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #0b1f3a, #1b6ca8);
-    color: white;
-    text-align: center;
+*{
+    box-sizing:border-box;
 }
-
-.container {
-    padding: 70px 20px;
+html,
+body{
+    margin:0;
+    padding:0;
+    min-height:100%;
 }
-
-.logo {
-    width: 400px;
-    height: 400px;
-    object-fit: contain;
-    border-radius: 20px;
+body{
+    margin:0;
+    font-family:
+    "Segoe UI",
+    "Noto Sans Arabic",
+    Arial,
+    sans-serif;
+    background:
+    radial-gradient(
+        circle at top,
+        #1b6ca8 0%,
+        #0b1f3a 45%,
+        #06152b 100%
+    );
+    color:white;
+    text-align:center;
+    min-height:100vh;
 }
-.box {
-    background: rgba(255,255,255,0.15);
-    max-width: 400px;
-    margin: 40px auto;
-    padding: 30px;
-    border-radius: 20px;
+/* الخلفية */
+.background{
+    position:fixed;
+    inset:0;
+    background:
+    radial-gradient(
+        circle at 20% 25%,
+        rgba(0,220,255,.16),
+        transparent 32%
+    ),
+    radial-gradient(
+        circle at 80% 75%,
+        rgba(0,130,255,.18),
+        transparent 35%
+    );
+    pointer-events:none;
 }
-
-input {
-    width: 85%;
-    padding: 12px;
-    margin: 10px;
-    border-radius: 10px;
-    border: none;
+/* المحتوى */
+.container{
+    position:relative;
+    z-index:2;
+    width:min(600px,92vw);
+    margin:auto;
+    padding:
+    50px 20px;
 }
-
-button {
-    padding: 12px 35px;
-    border: none;
-    border-radius: 25px;
-    background: white;
-    color: #1b6ca8;
-    font-size: 18px;
+/* اللوجو */
+.logo{
+    width:
+    min(260px,70vw);
+    height:
+    auto;
+    object-fit:contain;
+    border-radius:20px;
+    margin-bottom:20px;
+    filter:
+    drop-shadow(
+        0 15px 35px rgba(0,0,0,.35)
+    );
 }
-
+/* العنوان */
+h1{
+    font-size:
+    clamp(30px,5vw,42px);
+    margin:
+    10px 0;
+}
+/* اسم المنصة */
+.subtitle{
+    font-size:20px;
+    color:
+    rgba(255,255,255,.85);
+    margin-bottom:30px;
+}
+/* صندوق الدخول */
+.box{
+    background:
+    rgba(255,255,255,.12);
+    backdrop-filter:
+    blur(15px);
+    max-width:420px;
+    margin:
+    0 auto;
+    padding:
+    35px 25px;
+    border-radius:25px;
+    border:
+    1px solid rgba(255,255,255,.18);
+    box-shadow:
+    0 20px 60px rgba(0,0,0,.30);
+}
+/* الحقول */
+input{
+    width:90%;
+    padding:14px;
+    margin:
+    10px 0;
+    border-radius:12px;
+    border:none;
+    outline:none;
+    font-size:17px;
+    text-align:right;
+}
+/* زر الدخول */
+.login-button{
+    margin-top:15px;
+    padding:
+    14px 45px;
+    border:none;
+    border-radius:30px;
+    background:
+    linear-gradient(
+        135deg,
+        #ffffff,
+        #dff8ff
+    );
+    color:#1b6ca8;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:
+    .3s;
+    box-shadow:
+    0 8px 25px rgba(0,0,0,.25);
+}
+.login-button:hover{
+    transform:
+    scale(1.06);
+    box-shadow:
+    0 12px 35px rgba(255,255,255,.20);
+}
+/* الهاتف */
+@media(max-width:600px){
+    .container{
+        padding:
+        35px 15px;
+    }
+    .logo{
+        width:
+        220px;
+    }
+    .box{
+        padding:
+        30px 15px;
+    }
+    input{
+        width:92%;
+    }
+}
 </style>
-
 </head>
-
 <body>
-
+<div class="background"></div>
 <div class="container">
-
-<img src="IMG_0282.PNG" class="logo">
-
-<h1>تسجيل دخول الأخصائي</h1>
-
-<p>
+<img
+src="IMG_0282.PNG"
+class="logo"
+alt="PhysioVision AI">
+<h1>
+تسجيل دخول الأخصائي
+</h1>
+<div class="subtitle">
 PhysioVision AI – M² Edition
-</p>
-
-
+</div>
 <div class="box">
-
-<input id="username" type="text" placeholder="اسم المستخدم">
-
-<input id="password" type="password" placeholder="كلمة المرور">
+<input
+id="username"
+type="text"
+placeholder="اسم المستخدم"
+autocomplete="username">
+<input
+id="password"
+type="password"
+placeholder="كلمة المرور"
+autocomplete="current-password">
 <br>
-
-
-<button onclick="loginDoctor()">
+<button
+class="login-button"
+onclick="loginDoctor()">
 دخول
 </button>
-
 </div>
-
 </div>
 <script>
-
 function loginDoctor(){
-
-let username = document.getElementById("username").value;
-let password = document.getElementById("password").value;
-
-
-if(username === "" || password === ""){
-
-alert("يرجى إدخال اسم المستخدم وكلمة المرور");
-
-return;
-
+    const username =
+    document.getElementById("username").value.trim();
+    const password =
+    document.getElementById("password").value.trim();
+    if(username === "" || password === ""){
+        alert(
+            "يرجى إدخال اسم المستخدم وكلمة المرور"
+        );
+        return;
+    }
+    localStorage.setItem(
+        "doctorLogin",
+        username
+    );
+    window.location.href =
+    "dashboard.html";
 }
-
-
-localStorage.setItem("doctorLogin", username);
-
-window.location.href="dashboard.html";
-
-}
-
 </script>
 </body>
-
 </html>
