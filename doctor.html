@@ -1,13 +1,28 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+      content="width=device-width,
+               initial-scale=1.0,
+               maximum-scale=1.0,
+               user-scalable=no">
+
 <title>PhysioVision AI – M² Edition</title>
+
 <style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
 *{
     box-sizing:border-box;
 }
+
 html,
 body{
     margin:0;
@@ -16,532 +31,1212 @@ body{
     height:100%;
     overflow:hidden;
 }
+
 body{
+
     font-family:
-    "Segoe UI",
-    "Noto Sans Arabic",
-    Arial,
-    sans-serif;
+        "Segoe UI",
+        "Noto Sans Arabic",
+        Arial,
+        sans-serif;
+
     background:
-    radial-gradient(
-        circle at 50% 40%,
-        #1b6ca8 0%,
-        #102d52 45%,
-        #061426 100%
-    );
+        radial-gradient(
+            circle at 50% 40%,
+            #1b6ca8 0%,
+            #102d52 45%,
+            #061426 100%
+        );
+
     color:white;
+
+    position:relative;
 }
-/* =========================
-   الخلفية
-========================= */
+
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
 .background{
+
     position:absolute;
+
     inset:0;
+
     background:
-    radial-gradient(
-        circle at 20% 25%,
-        rgba(0,220,255,.18),
-        transparent 32%
-    ),
-    radial-gradient(
-        circle at 80% 75%,
-        rgba(0,130,255,.20),
-        transparent 35%
-    );
+
+        radial-gradient(
+            circle at 20% 25%,
+            rgba(0,220,255,.18),
+            transparent 32%
+        ),
+
+        radial-gradient(
+            circle at 80% 75%,
+            rgba(0,130,255,.20),
+            transparent 35%
+        );
+
     animation:
-    backgroundPulse 8s ease-in-out infinite;
+        backgroundPulse 8s ease-in-out infinite;
+
 }
+
+
 @keyframes backgroundPulse{
+
     0%,100%{
         opacity:.75;
     }
+
     50%{
         opacity:1;
     }
+
 }
-/* =========================
-   شبكة الذكاء الاصطناعي
-========================= */
+
+
+/* =========================================================
+   AI GRID
+========================================================= */
+
 .network{
+
     position:absolute;
+
     inset:-100px;
+
     opacity:.12;
+
     background-image:
-    linear-gradient(
-        90deg,
-        transparent 49%,
-        rgba(130,230,255,.18) 50%,
-        transparent 51%
-    ),
-    linear-gradient(
-        0deg,
-        transparent 49%,
-        rgba(130,230,255,.12) 50%,
-        transparent 51%
-    );
+
+        linear-gradient(
+            90deg,
+            transparent 49%,
+            rgba(130,230,255,.18) 50%,
+            transparent 51%
+        ),
+
+        linear-gradient(
+            0deg,
+            transparent 49%,
+            rgba(130,230,255,.12) 50%,
+            transparent 51%
+        );
+
     background-size:90px 90px;
+
     animation:
-    moveGrid 20s linear infinite;
+        moveGrid 20s linear infinite;
+
 }
+
+
 @keyframes moveGrid{
+
     from{
         transform:translate(0,0);
     }
+
     to{
         transform:translate(90px,90px);
     }
+
 }
-/* =========================
-   النقاط المضيئة
-========================= */
+
+
+/* =========================================================
+   PARTICLES
+========================================================= */
+
 .particle{
+
     position:absolute;
+
     width:4px;
     height:4px;
+
     border-radius:50%;
+
     background:#9befff;
+
     box-shadow:
-    0 0 10px #63e5ff,
-    0 0 25px #20bfff;
+        0 0 10px #63e5ff,
+        0 0 25px #20bfff;
+
     animation:
-    particleFloat 7s ease-in-out infinite;
+        particleFloat 7s ease-in-out infinite;
+
 }
+
+
 .p1{
     top:15%;
     left:12%;
 }
+
 .p2{
     top:30%;
     left:86%;
     animation-delay:1s;
 }
+
 .p3{
     top:75%;
     left:10%;
     animation-delay:2s;
 }
+
 .p4{
     top:82%;
     left:88%;
     animation-delay:3s;
 }
+
 .p5{
     top:12%;
     left:72%;
     animation-delay:4s;
 }
+
 .p6{
     top:55%;
     left:5%;
     animation-delay:2.5s;
 }
+
 .p7{
     top:48%;
     left:94%;
     animation-delay:4.5s;
 }
+
+
 @keyframes particleFloat{
+
     0%,100%{
+
         transform:
-        translateY(0)
-        scale(1);
+            translateY(0)
+            scale(1);
+
         opacity:.2;
     }
+
     50%{
+
         transform:
-        translateY(-25px)
-        scale(1.5);
+            translateY(-25px)
+            scale(1.5);
+
         opacity:.9;
     }
+
 }
-/* =========================
-   صورة الدكتورة
-========================= */
+
+
+/* =========================================================
+   PHOTO CONTAINER
+========================================================= */
+
 .photo{
+
     position:absolute;
+
     inset:0;
+
     width:100%;
     height:100%;
+
     display:flex;
+
     align-items:center;
     justify-content:center;
-    z-index:1;
-    pointer-events:none;
+
     overflow:hidden;
+
+    z-index:1;
+
+    pointer-events:none;
+
 }
+
+
+/* =========================================================
+   GLOW BEHIND PHOTO
+========================================================= */
+
+.glow{
+
+    position:absolute;
+
+    width:75%;
+    height:70%;
+
+    background:
+
+        radial-gradient(
+            circle,
+            rgba(40,215,255,.35),
+            rgba(30,130,255,.12),
+            transparent 70%
+        );
+
+    filter:blur(70px);
+
+    opacity:.35;
+
+    border-radius:50%;
+
+    z-index:0;
+
+    animation:
+        glowPulse 6s ease-in-out infinite;
+
+}
+
+
+@keyframes glowPulse{
+
+    0%,100%{
+
+        transform:scale(.95);
+
+        opacity:.25;
+    }
+
+    50%{
+
+        transform:scale(1.08);
+
+        opacity:.45;
+    }
+
+}
+
+
+/* =========================================================
+   MAIN PHOTO
+========================================================= */
+
 .photo img{
-    width:115%;
-    height:115%;
+
+    position:absolute;
+
+    width:100%;
+    height:100%;
+
     max-width:none;
     max-height:none;
+
     object-fit:contain;
+
     object-position:center center;
-    opacity:.35;
+
+    left:50%;
+    top:50%;
+
     transform:
-    translateX(0)
-    scale(1.05);
+        translate(-50%, -50%)
+        scale(1);
+
+    opacity:.38;
+
     filter:
+
         saturate(.85)
+
         contrast(.95)
+
         drop-shadow(
             0 0 35px
             rgba(70,220,255,.25)
         )
+
         drop-shadow(
             0 25px 60px
             rgba(0,0,0,.45)
         );
+
     -webkit-mask-image:
+
         radial-gradient(
             ellipse at center,
-            black 30%,
-            rgba(0,0,0,.8) 60%,
-            transparent 90%
+            black 35%,
+            rgba(0,0,0,.85) 65%,
+            transparent 100%
         );
+
     mask-image:
+
         radial-gradient(
             ellipse at center,
-            black 30%,
-            rgba(0,0,0,.8) 60%,
-            transparent 90%
+            black 35%,
+            rgba(0,0,0,.85) 65%,
+            transparent 100%
         );
+
     animation:
-    photoEnter 2s ease both,
-    photoFloat 8s ease-in-out 2s infinite;
+
+        photoEnter
+        2s
+        ease
+        both,
+
+        photoFloat
+        8s
+        ease-in-out
+        2s
+        infinite;
+
 }
+
+
+/* =========================================================
+   PHOTO ENTER
+========================================================= */
+
 @keyframes photoEnter{
+
     from{
+
         opacity:0;
+
         transform:
-        translateX(0)
-        scale(1.10);
-        filter:
-        blur(15px);
+            translate(-50%, -50%)
+            scale(1.08);
+
+        filter:blur(15px);
+
     }
+
     to{
-        opacity:.35;
+
+        opacity:.38;
+
         transform:
-        translateX(0)
-        scale(1.05);
-        filter:
-        blur(0);
+            translate(-50%, -50%)
+            scale(1);
+
+        filter:blur(0);
+
     }
+
 }
+
+
+/* =========================================================
+   PHOTO FLOAT
+   مهم:
+   التمركز يبقى محفوظ أثناء الحركة
+========================================================= */
+
 @keyframes photoFloat{
+
     0%,100%{
+
         transform:
-        translateX(0)
-        scale(1.05)
-        translateY(0);
+            translate(-50%, -50%)
+            scale(1);
+
     }
+
     50%{
+
         transform:
-        translateX(0)
-        scale(1.08)
-        translateY(-7px);
+            translate(
+                -50%,
+                calc(-50% - 5px)
+            )
+            scale(1.015);
+
     }
+
 }
-/* =========================
-   الهالة خلف الصورة
-========================= */
-.glow{
-    position:absolute;
-    width:75%;
-    height:70%;
-    background:
-    radial-gradient(
-        circle,
-        rgba(40,215,255,.35),
-        rgba(30,130,255,.12),
-        transparent 70%
-    );
-    filter:blur(70px);
-    opacity:.35;
-    border-radius:50%;
-    z-index:-1;
-    animation:
-    glowPulse 6s ease-in-out infinite;
-}
-@keyframes glowPulse{
-    0%,100%{
-        transform:scale(.95);
-        opacity:.25;
-    }
-    50%{
-        transform:scale(1.08);
-        opacity:.45;
-    }
-}
-/* =========================
-   طبقة فوق الصورة
-========================= */
+
+
+/* =========================================================
+   PHOTO OVERLAY
+========================================================= */
+
 .photo::after{
+
     content:"";
+
     position:absolute;
+
     inset:0;
+
     background:
-    linear-gradient(
-        to bottom,
-        rgba(6,20,38,.05),
-        rgba(6,20,38,.15) 45%,
-        rgba(6,20,38,.82) 100%
-    );
+
+        linear-gradient(
+            to bottom,
+
+            rgba(6,20,38,.05),
+
+            rgba(6,20,38,.12) 40%,
+
+            rgba(6,20,38,.45) 65%,
+
+            rgba(6,20,38,.90) 100%
+        );
+
     pointer-events:none;
+
 }
-/* =========================
-   المحتوى
-========================= */
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
 .content{
+
     position:relative;
+
     z-index:10;
+
     width:100%;
     height:100%;
+
     display:flex;
+
     flex-direction:column;
+
     align-items:center;
+
     justify-content:flex-end;
+
     text-align:center;
+
     padding:
-    0 20px 55px;
+        0 20px 55px;
+
 }
-/* =========================
-   اسم المنصة
-========================= */
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
 .title{
+
+    width:100%;
+
+    max-width:850px;
+
     font-size:
-    clamp(30px,5vw,58px);
+        clamp(30px,5vw,58px);
+
     font-weight:700;
+
     line-height:1.3;
+
     margin:0;
+
+    text-align:center;
+
     text-shadow:
-    0 4px 25px
-    rgba(0,0,0,.7);
+        0 4px 25px
+        rgba(0,0,0,.7);
+
     animation:
-    textEnter 1.5s ease .5s both;
+        textEnter
+        1.5s
+        ease
+        .5s
+        both;
+
 }
-/* =========================
-   العبارة
-========================= */
+
+
+/* =========================================================
+   ARABIC SUBTITLE
+========================================================= */
+
 .subtitle{
+
+    width:100%;
+
+    max-width:850px;
+
     margin-top:12px;
+
     font-size:
-    clamp(18px,2.6vw,30px);
+        clamp(18px,2.6vw,30px);
+
     font-weight:500;
+
     line-height:1.8;
+
     color:
-    rgba(255,255,255,.95);
+        rgba(255,255,255,.95);
+
+    text-align:center;
+
     text-shadow:
-    0 3px 18px
-    rgba(0,0,0,.7);
+        0 3px 18px
+        rgba(0,0,0,.7);
+
     animation:
-    textEnter 1.5s ease .8s both;
+        textEnter
+        1.5s
+        ease
+        .8s
+        both;
+
 }
-/* =========================
-   العبارة الإنجليزية
-========================= */
+
+
+/* =========================================================
+   ENGLISH QUOTE
+========================================================= */
+
 .quote{
+
+    width:100%;
+
+    max-width:850px;
+
     margin-top:8px;
+
     font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
+        Georgia,
+        "Times New Roman",
+        serif;
+
     font-size:
-    clamp(14px,1.8vw,21px);
+        clamp(14px,1.8vw,21px);
+
     letter-spacing:1px;
+
+    line-height:1.5;
+
     color:
-    rgba(190,240,255,.9);
+        rgba(190,240,255,.9);
+
+    text-align:center;
+
     text-shadow:
-    0 2px 15px
-    rgba(0,0,0,.8);
+        0 2px 15px
+        rgba(0,0,0,.8);
+
     animation:
-    textEnter 1.5s ease 1.1s both;
+        textEnter
+        1.5s
+        ease
+        1.1s
+        both;
+
 }
+
+
+/* =========================================================
+   TEXT ANIMATION
+========================================================= */
+
 @keyframes textEnter{
+
     from{
+
         opacity:0;
+
         transform:
-        translateY(25px);
+            translateY(25px);
+
     }
+
     to{
+
         opacity:1;
+
         transform:
-        translateY(0);
+            translateY(0);
+
     }
+
 }
-/* =========================
-   زر المتابعة
-========================= */
+
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
 .start{
+
     margin-top:22px;
+
     padding:
-    14px 48px;
+        14px 48px;
+
     border:none;
+
     border-radius:50px;
+
     background:
-    linear-gradient(
-        135deg,
-        #ffffff,
-        #dff8ff
-    );
+
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #dff8ff
+        );
+
     color:#0b2a4a;
+
     font-size:18px;
+
     font-weight:700;
+
     cursor:pointer;
+
     box-shadow:
-    0 0 25px
-    rgba(130,230,255,.3),
-    0 12px 35px
-    rgba(0,0,0,.4);
-    transition:
-    .3s;
+
+        0 0 25px
+        rgba(130,230,255,.3),
+
+        0 12px 35px
+        rgba(0,0,0,.4);
+
+    transition:.3s;
+
     animation:
-    buttonEnter 1.5s ease 1.4s both;
+
+        buttonEnter
+        1.5s
+        ease
+        1.4s
+        both;
+
 }
+
+
 .start:hover{
+
     transform:
-    translateY(-4px)
-    scale(1.05);
-    box-shadow:
-    0 0 40px
-    rgba(100,225,255,.65),
-    0 15px 40px
-    rgba(0,0,0,.45);
-}
-@keyframes buttonEnter{
-    from{
-        opacity:0;
-        transform:
-        translateY(20px)
-        scale(.9);
-    }
-    to{
-        opacity:1;
-        transform:
-        translateY(0)
-        scale(1);
-    }
-}
-/* =========================
-   انتقال
-========================= */
-.fadeOut{
-    animation:
-    pageFadeOut .7s ease forwards;
-}
-@keyframes pageFadeOut{
-    to{
-        opacity:0;
-        transform:
-        scale(1.03);
-    }
-}
-/* =========================
-   الهاتف
-========================= */
-@media(max-width:600px){
-    .photo{
-        align-items:center;
-        justify-content:center;
-        overflow:hidden;
-    }
-    .photo img{
-        width:115%;
-        height:115%;
-        object-fit:contain;
-        object-position:center center;
-        transform:
-        translateX(0)
-        scale(1.02);
-        opacity:.32;
-    }
-    .content{
-        padding:
-        0 15px 35px;
-    }
-    .title{
-        font-size:30px;
-    }
-    .subtitle{
-        font-size:18px;
-        line-height:1.7;
-    }
-    .quote{
-        font-size:14px;
-    }
-    .start{
-        font-size:17px;
-        padding:
-        13px 40px;
-    }
-}
-/* =========================
-   اللابتوب والشاشات الكبيرة
-========================= */
-@media(min-width:1000px){
-    .photo{
-        align-items:center;
-        justify-content:center;
-    }
-    .photo img{
-        width:125%;
-        height:125%;
-        object-fit:contain;
-        object-position:center center;
-        transform:
-        translateX(0)
+        translateY(-4px)
         scale(1.05);
-        opacity:.38;
-    }
-    .content{
-        padding-bottom:65px;
-    }
+
+    box-shadow:
+
+        0 0 40px
+        rgba(100,225,255,.65),
+
+        0 15px 40px
+        rgba(0,0,0,.45);
+
 }
+
+
+/* =========================================================
+   BUTTON ANIMATION
+========================================================= */
+
+@keyframes buttonEnter{
+
+    from{
+
+        opacity:0;
+
+        transform:
+            translateY(20px)
+            scale(.9);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+}
+
+
+/* =========================================================
+   PAGE TRANSITION
+========================================================= */
+
+.fadeOut{
+
+    animation:
+        pageFadeOut
+        .7s
+        ease
+        forwards;
+
+}
+
+
+@keyframes pageFadeOut{
+
+    to{
+
+        opacity:0;
+
+        transform:
+            scale(1.03);
+
+    }
+
+}
+
+
+/* =========================================================
+   📱 PHONE
+========================================================= */
+
+@media (max-width:600px){
+
+    html,
+    body{
+
+        width:100%;
+        height:100%;
+
+        overflow:hidden;
+
+    }
+
+
+    /* -----------------------------------------
+       الصورة
+    ----------------------------------------- */
+
+    .photo{
+
+        position:absolute;
+
+        inset:0;
+
+        width:100%;
+        height:100%;
+
+        display:flex;
+
+        align-items:center;
+        justify-content:center;
+
+        overflow:hidden;
+
+        z-index:1;
+
+    }
+
+
+    .photo img{
+
+        position:absolute;
+
+        width:100%;
+        height:100%;
+
+        max-width:none;
+        max-height:none;
+
+        object-fit:contain;
+
+        object-position:center center;
+
+        left:50%;
+        top:50%;
+
+        transform:
+            translate(-50%, -50%)
+            scale(1);
+
+        opacity:.38;
+
+        animation:
+
+            photoEnter
+            2s
+            ease
+            both,
+
+            photoFloat
+            8s
+            ease-in-out
+            2s
+            infinite;
+
+    }
+
+
+    /* -----------------------------------------
+       المحتوى
+    ----------------------------------------- */
+
+    .content{
+
+        position:relative;
+
+        width:100%;
+        height:100%;
+
+        padding:
+            0 15px 35px;
+
+        display:flex;
+
+        flex-direction:column;
+
+        align-items:center;
+
+        justify-content:flex-end;
+
+        text-align:center;
+
+    }
+
+
+    /* -----------------------------------------
+       العنوان
+    ----------------------------------------- */
+
+    .title{
+
+        width:100%;
+
+        max-width:390px;
+
+        font-size:30px;
+
+        line-height:1.25;
+
+        text-align:center;
+
+        margin:0;
+
+        word-break:normal;
+
+        overflow-wrap:normal;
+
+    }
+
+
+    /* -----------------------------------------
+       النص العربي
+    ----------------------------------------- */
+
+    .subtitle{
+
+        width:100%;
+
+        max-width:390px;
+
+        margin-top:10px;
+
+        font-size:18px;
+
+        line-height:1.7;
+
+        text-align:center;
+
+    }
+
+
+    /* -----------------------------------------
+       النص الإنجليزي
+    ----------------------------------------- */
+
+    .quote{
+
+        width:100%;
+
+        max-width:390px;
+
+        margin-top:7px;
+
+        font-size:14px;
+
+        line-height:1.5;
+
+        text-align:center;
+
+        letter-spacing:.5px;
+
+    }
+
+
+    /* -----------------------------------------
+       زر المتابعة
+    ----------------------------------------- */
+
+    .start{
+
+        margin-top:18px;
+
+        padding:
+            13px 40px;
+
+        font-size:17px;
+
+        white-space:nowrap;
+
+    }
+
+}
+
+
+/* =========================================================
+   📱 PHONE - SMALL HEIGHT
+========================================================= */
+
+@media (max-width:600px) and (max-height:750px){
+
+    .content{
+
+        padding-bottom:25px;
+
+    }
+
+
+    .title{
+
+        font-size:26px;
+
+    }
+
+
+    .subtitle{
+
+        font-size:16px;
+
+        margin-top:7px;
+
+    }
+
+
+    .quote{
+
+        font-size:12px;
+
+        margin-top:5px;
+
+    }
+
+
+    .start{
+
+        margin-top:13px;
+
+        padding:
+            11px 36px;
+
+        font-size:16px;
+
+    }
+
+}
+
+
+/* =========================================================
+   💻 LAPTOP / LARGE SCREENS
+========================================================= */
+
+@media (min-width:1000px){
+
+    .photo{
+
+        align-items:center;
+
+        justify-content:center;
+
+    }
+
+
+    .photo img{
+
+        width:100%;
+
+        height:100%;
+
+        object-fit:contain;
+
+        object-position:center center;
+
+        left:50%;
+        top:50%;
+
+        transform:
+            translate(-50%, -50%)
+            scale(1);
+
+        opacity:.38;
+
+    }
+
+
+    .content{
+
+        padding-bottom:65px;
+
+    }
+
+}
+
+
+/* =========================================================
+   🖥️ VERY LARGE SCREENS
+========================================================= */
+
+@media (min-width:1400px){
+
+    .photo img{
+
+        width:95%;
+
+        height:95%;
+
+    }
+
+}
+
+
+/* =========================================================
+   SAFE AREA - iPhone
+========================================================= */
+
+@supports (padding-bottom: env(safe-area-inset-bottom)){
+
+    .content{
+
+        padding-bottom:
+            calc(
+                35px +
+                env(safe-area-inset-bottom)
+            );
+
+    }
+
+}
+
 </style>
+
 </head>
+
+
 <body>
-<!-- الخلفية -->
+
+
+<!-- =====================================================
+     BACKGROUND
+===================================================== -->
+
 <div class="background"></div>
+
 <div class="network"></div>
-<!-- النقاط -->
+
+
+<!-- =====================================================
+     PARTICLES
+===================================================== -->
+
 <div class="particle p1"></div>
+
 <div class="particle p2"></div>
+
 <div class="particle p3"></div>
+
 <div class="particle p4"></div>
+
 <div class="particle p5"></div>
+
 <div class="particle p6"></div>
+
 <div class="particle p7"></div>
-<!-- صورة الدكتورة -->
+
+
+<!-- =====================================================
+     PHOTO
+===================================================== -->
+
 <div class="photo">
+
     <div class="glow"></div>
+
     <img
         src="IMG_0684.PNG"
         alt="PhysioVision AI">
+
 </div>
-<!-- المحتوى -->
+
+
+<!-- =====================================================
+     CONTENT
+===================================================== -->
+
 <div class="content">
+
+
+    <!-- TITLE -->
+
     <div class="title">
+
         PhysioVision AI – M² Edition
+
     </div>
+
+
+    <!-- ARABIC SUBTITLE -->
+
     <div class="subtitle">
+
         من يدٍ صنعت فيّ البداية… إلى حلمٍ صنعناه معًا.
+
     </div>
+
+
+    <!-- ENGLISH QUOTE -->
+
     <div class="quote">
+
         Transforming Movement into Measurable Recovery
+
     </div>
+
+
+    <!-- BUTTON -->
+
     <button
         class="start"
         onclick="startPlatform()">
+
         متابعة
+
     </button>
+
+
 </div>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
 <script>
+
 function startPlatform(){
+
     document.body.classList.add("fadeOut");
+
     setTimeout(function(){
+
         window.location.href =
-        "login.html";
+            "login.html";
+
     },700);
+
 }
+
 </script>
+
+
 </body>
+
 </html>
