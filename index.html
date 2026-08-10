@@ -76,13 +76,19 @@ button {
 
 <body>
 
+<script>
+
+if (!sessionStorage.getItem("introShown")) {
+
+    sessionStorage.setItem("introShown", "yes");
+
+    window.location.href = "intro.html";
+
+}
+
+</script>
+
 <div class="container">
-<img src="IMG_0282.PNG" class="logo">
-
-<h1>PhysioVision AI – M² Edition</h1>
-
-<div class="card">
-
 <p>
 منصة ذكية لتحليل الحركة ودعم التقييم والتأهيل الحركي
 باستخدام الذكاء الاصطناعي والرؤية الحاسوبية
