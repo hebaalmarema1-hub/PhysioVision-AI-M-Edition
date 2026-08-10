@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+<title>PhysioVision AI – M² Edition</title>
+<style>
+*{
+    box-sizing:border-box;
+}
+html,
+body{
+    margin:0;
+    padding:0;
+    width:100%;
+    min-height:100%;
+}
+body{
+    font-family:
+    "Segoe UI",
+    "Noto Sans Arabic",
+    Tahoma,
+    Arial,
+    sans-serif;
+    background:
+    radial-gradient(
+        circle at 50% 35%,
+        #1b6ca8 0%,
+        #102d52 45%,
+        #061426 100%
+    );
+    color:white;
+    overflow:hidden;
+}
+/* الخلفية المضيئة */
+.background{
+    position:fixed;
+    inset:0;
+    background:
+    radial-gradient(
+        circle at 20% 25%,
+        rgba(0,220,255,.18),
+        transparent 30%
+    ),
+    radial-gradient(
+        circle at 80% 70%,
+        rgba(0,130,255,.20),
+        transparent 35%
+    );
+    animation:
+    backgroundPulse 8s ease-in-out infinite;
+}
+@keyframes backgroundPulse{
+    0%,100%{
+        opacity:.65;
+    }
+    50%{
+        opacity:1;
+    }
+}
+/* الهالة خلف الصورة */
+.glow{
+    position:fixed;
+    width:75vw;
+    height:75vw;
+    max-width:800px;
+    max-height:800px;
+    left:50%;
+    top:38%;
+    transform:
+    translate(-50%,-50%);
+    background:
+    radial-gradient(
+        circle,
+        rgba(55,220,255,.35),
+        rgba(30,130,255,.16),
+        transparent 70%
+    );
+    filter:blur(65px);
+    animation:
+    glowMove 7s ease-in-out infinite;
+}
+@keyframes glowMove{
+    0%,100%{
+        transform:
+        translate(-50%,-50%)
+        scale(.9);
+        opacity:.55;
+    }
+    50%{
+        transform:
+        translate(-50%,-50%)
+        scale(1.08);
+        opacity:.9;
+    }
+}
+/* النقاط المضيئة */
+.particle{
+    position:fixed;
+    width:4px;
+    height:4px;
+    border-radius:50%;
+    background:#b5f5ff;
+    box-shadow:
+    0 0 10px #63e5ff,
+    0 0 25px #20bfff;
+    animation:
+    float 6s ease-in-out infinite;
+}
+.p1{
+    top:15%;
+    left:12%;
+}
+.p2{
+    top:25%;
+    left:87%;
+    animation-delay:1s;
+}
+.p3{
+    top:72%;
+    left:8%;
+    animation-delay:2s;
+}
+.p4{
+    top:82%;
+    left:90%;
+    animation-delay:3s;
+}
+.p5{
+    top:18%;
+    left:75%;
+    animation-delay:4s;
+}
+.p6{
+    top:55%;
+    left:5%;
+    animation-delay:2.5s;
+}
+@keyframes float{
+    0%,100%{
+        transform:
+        translateY(0)
+        scale(1);
+        opacity:.25;
+    }
+    50%{
+        transform:
+        translateY(-25px)
+        scale(1.5);
+        opacity:1;
+    }
+}
+/* الصفحة */
+.page{
+    position:relative;
+    z-index:5;
+    width:100%;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:
+    25px 20px;
+}
+/* الصورة */
+.doctor-photo{
+    width:
+    min(650px,82vw);
+    height:
+    min(650px,58vh);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    animation:
+    photoEnter 2s ease both;
+}
+.doctor-photo img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    opacity:.60;
+    filter:
+    saturate(.85)
+    contrast(.95)
+    drop-shadow(
+        0 0 35px
+        rgba(80,220,255,.30)
+    )
+    drop-shadow(
+        0 25px 55px
+        rgba(0,0,0,.55)
+    );
+    -webkit-mask-image:
+    radial-gradient(
+        ellipse at center,
+        black 38%,
+        rgba(0,0,0,.9) 62%,
+        transparent 90%
+    );
+    mask-image:
+    radial-gradient(
+        ellipse at center,
+        black 38%,
+        rgba(0,0,0,.9) 62%,
+        transparent 90%
+    );
+    animation:
+    photoFloat 8s ease-in-out 2s infinite;
+}
+@keyframes photoEnter{
+    from{
+        opacity:0;
+        transform:
+        scale(.88)
+        translateY(25px);
+        filter:
+        blur(12px);
+    }
+    to{
+        opacity:1;
+        transform:
+        scale(1)
+        translateY(0);
+        filter:
+        blur(0);
+    }
+}
+@keyframes photoFloat{
+    0%,100%{
+        transform:
+        scale(1)
+        translateY(0);
+    }
+    50%{
+        transform:
+        scale(1.025)
+        translateY(-8px);
+    }
+}
+/* النص */
+.message{
+    position:relative;
+    z-index:10;
+    width:
+    min(850px,92vw);
+    margin-top:-35px;
+    animation:
+    messageEnter 1.5s ease 1s both;
+}
+.main-title{
+    font-size:
+    clamp(25px,4vw,42px);
+    font-weight:700;
+    line-height:1.6;
+    margin:0;
+    color:white;
+    text-shadow:
+    0 4px 25px rgba(0,0,0,.6);
+}
+.quote{
+    margin-top:12px;
+    font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+    font-size:
+    clamp(15px,2vw,22px);
+    color:
+    rgba(200,240,255,.90);
+    letter-spacing:.5px;
+}
+/* الزر */
+.continue{
+    margin-top:25px;
+    padding:
+    13px 42px;
+    border:none;
+    border-radius:50px;
+    background:
+    linear-gradient(
+        135deg,
+        #ffffff,
+        #dff8ff
+    );
+    color:#0b2a4a;
+    font-size:18px;
+    font-weight:700;
+    cursor:pointer;
+    box-shadow:
+    0 0 25px
+    rgba(100,220,255,.25),
+    0 12px 35px
+    rgba(0,0,0,.35);
+    transition:
+    .3s;
+    animation:
+    buttonEnter 1.2s ease 1.5s both;
+}
+.continue:hover{
+    transform:
+    translateY(-3px)
+    scale(1.05);
+    box-shadow:
+    0 0 40px
+    rgba(100,225,255,.65),
+    0 15px 40px
+    rgba(0,0,0,.4);
+}
+@keyframes messageEnter{
+    from{
+        opacity:0;
+        transform:
+        translateY(25px);
+    }
+    to{
+        opacity:1;
+        transform:
+        translateY(0);
+    }
+}
+@keyframes buttonEnter{
+    from{
+        opacity:0;
+        transform:
+        translateY(15px)
+        scale(.9);
+    }
+    to{
+        opacity:1;
+        transform:
+        translateY(0)
+        scale(1);
+    }
+}
+/* الهاتف */
+@media(max-width:600px){
+    .page{
+        padding:
+        15px;
+    }
+    .doctor-photo{
+        width:100vw;
+        height:55vh;
+    }
+    .doctor-photo img{
+        opacity:.55;
+    }
+    .message{
+        margin-top:-25px;
+    }
+    .main-title{
+        font-size:24px;
+    }
+    .quote{
+        font-size:14px;
+        line-height:1.7;
+    }
+    .continue{
+        font-size:16px;
+        padding:
+        12px 35px;
+    }
+}
+/* اللابتوب */
+@media(min-width:900px){
+    .doctor-photo{
+        height:58vh;
+    }
+    .message{
+        margin-top:-45px;
+    }
+}
+</style>
+</head>
+<body>
+<div class="background"></div>
+<div class="glow"></div>
+<div class="particle p1"></div>
+<div class="particle p2"></div>
+<div class="particle p3"></div>
+<div class="particle p4"></div>
+<div class="particle p5"></div>
+<div class="particle p6"></div>
+<div class="page">
+    <!-- صورة الدكتورة -->
+    <div class="doctor-photo">
+        <img
+            src="IMG_0684.PNG"
+            alt="د. منة الله المريمي">
+    </div>
+    <!-- العبارة -->
+    <div class="message">
+        <div class="main-title">
+            من يدٍ صنعت فيّ البداية…
+            إلى حلمٍ صنعناه معًا.
+        </div>
+        <div class="quote">
+            Transforming Movement into Measurable Recovery
+        </div>
+        <button
+            class="continue"
+            onclick="goNext()">
+            متابعة
+        </button>
+    </div>
+</div>
+<script>
+function goNext(){
+    window.location.href =
+    "welcome.html";
+}
+</script>
+</body>
+</html>
