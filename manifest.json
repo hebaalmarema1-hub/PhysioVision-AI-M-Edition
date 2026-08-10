@@ -23,7 +23,7 @@
 {
   "name": "PhysioVision AI – M² Edition",
   "short_name": "PhysioVision",
-  "start_url": "./index.html",
+ "start_url": "./intro.html",
   "scope": "./",
   "display": "standalone",
   "background_color": "#0b1f3a",
